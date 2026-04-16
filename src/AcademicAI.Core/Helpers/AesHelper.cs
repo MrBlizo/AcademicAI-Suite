@@ -6,8 +6,16 @@ namespace AcademicAI.Core.Helpers;
 
 public static class AesHelper
 {
-    private static readonly byte[] MasterKey = Convert.FromBase64String("3vctpeqkc89i8JoJco/+AFudci/RKCA1sJaZOhU4n2s=");
-    private static readonly byte[] IV = Convert.FromBase64String("r2wcrxhHZ9IAFP2AlGyfYA==");
+    private static readonly byte[] MasterKey;
+    private static readonly byte[] IV;
+
+    static AesHelper()
+    {
+        var machineId = Environment.MachineName + ":" + Environment.UserName + ":AcademicAI:v3";
+        using var sha = SHA256.Create();
+        MasterKey = sha.ComputeHash(Encoding.UTF8.GetBytes(machineId));
+        IV = MD5.HashData(Encoding.UTF8.GetBytes(machineId + ":IV"));
+    }
 
     public static string Encrypt(string plainText)
     {
