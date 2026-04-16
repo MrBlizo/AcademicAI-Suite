@@ -35,3 +35,9 @@ credentials.json
 ## Temp
 logo_temp.png
 startup.log
+
+## Distribution
+*.zip
+
+## WPF temp
+*_wpftmp*
