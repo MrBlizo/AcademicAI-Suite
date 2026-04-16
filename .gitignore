@@ -1,0 +1,37 @@
+## .NET
+bin/
+obj/
+publish/
+*.user
+*.suo
+*.cache
+*.vs/
+.vs/
+
+## Build outputs
+*.dll
+*.pdb
+*.exe
+*.mdb
+
+## NuGet
+*.nupkg
+packages/
+.nuget/
+
+## IDE
+.idea/
+*.swp
+*~
+
+## OS
+Thumbs.db
+.DS_Store
+
+## Secrets
+*.env
+credentials.json
+
+## Temp
+logo_temp.png
+startup.log

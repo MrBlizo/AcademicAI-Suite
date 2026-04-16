@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore AcademicAI.sln
+
+      - name: Build
+        run: dotnet build AcademicAI.sln -c Release --no-restore
+
+      - name: Publish
+        run: dotnet publish src/AcademicAI.App/AcademicAI.App.csproj -c Release -r win-x64 --self-contained true -o publish/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AcademicAI-Suite
+          path: publish/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: publish/**
+          generate_release_notes: true

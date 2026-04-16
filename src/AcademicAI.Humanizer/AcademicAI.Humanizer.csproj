@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AcademicAI.Core\AcademicAI.Core.csproj" />
+    <ProjectReference Include="..\AcademicAI.Agents\AcademicAI.Agents.csproj" />
+  </ItemGroup>
+</Project>

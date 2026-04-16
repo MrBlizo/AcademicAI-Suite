@@ -1,0 +1,64 @@
+<Page x:Class="AcademicAI.App.Views.MathSolverView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:controls="clr-namespace:AcademicAI.App.Controls"
+      Title="Math Solver">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="32">
+            <TextBlock Text="Math Solver" FontSize="20" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16" />
+            <ui:Card Padding="20" Margin="0,0,0,16">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <ui:SymbolIcon Symbol="Target24" FontSize="20"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,8,0" />
+                        <TextBlock Text="Input" FontSize="14" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <ui:TextBox PlaceholderText="Enter a math problem (e.g., 'Solve 2x + 5 = 15')..." Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"
+                                AcceptsReturn="True" TextWrapping="Wrap" MinHeight="60"
+                                VerticalScrollBarVisibility="Auto" Margin="0,0,0,16" />
+                    <StackPanel Orientation="Horizontal">
+                        <ui:Button Appearance="Primary" Command="{Binding SolveCommand}"
+                                   IsEnabled="{Binding IsProcessing, Converter={StaticResource BoolNegate}}">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Target24" Margin="0,0,8,0" />
+                                <TextBlock Text="Solve" />
+                            </StackPanel>
+                        </ui:Button>
+                        <ui:Button Appearance="Secondary" Command="{Binding CancelCommand}"
+                                   Visibility="{Binding IsProcessing, Converter={StaticResource BoolToVis}}"
+                                   Margin="8,0,0,0" Content="Cancel" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsProcessing, Converter={StaticResource BoolToVis}}" Margin="0,8,0,0">
+                        <ui:ProgressRing IsIndeterminate="True" Width="20" Height="20" Margin="0,0,8,0" />
+                        <TextBlock Text="Solving..." FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </ui:Card>
+            <TextBlock Text="{Binding ErrorMessage}" FontSize="12" Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                       Margin="0,0,0,8" Visibility="{Binding ErrorMessage, Converter={StaticResource BoolToVis}}" />
+
+            <!-- Rendered Solution Output -->
+            <StackPanel Visibility="{Binding HasResult, Converter={StaticResource BoolToVis}}">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                    <Border Width="3" CornerRadius="2"
+                            Background="{DynamicResource AccentTextFillColorPrimaryBrush}"
+                            Margin="0,0,10,0" />
+                    <ui:SymbolIcon Symbol="Target24" FontSize="20"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,8,0" />
+                    <TextBlock Text="Solution" FontSize="14" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                </StackPanel>
+                <controls:MarkdownViewer MarkdownText="{Binding ResultText}" Margin="0,0,0,12" />
+                <ui:Button Appearance="Secondary" Command="{Binding CopyResultCommand}" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="Copy24" Margin="0,0,6,0" />
+                        <TextBlock Text="Copy" />
+                    </StackPanel>
+                </ui:Button>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,115 @@
+<Page x:Class="AcademicAI.App.Views.CitationsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      Title="Citations">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="32">
+
+            <TextBlock Text="Citations"
+                       FontSize="20"
+                       FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                       Margin="0,0,0,16" />
+
+            <ui:Card Padding="20" Margin="0,0,0,16">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <ui:SymbolIcon Symbol="DocumentText24"
+                                       FontSize="20"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       Margin="0,0,8,0" />
+                        <TextBlock Text="Source Text"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <TextBlock Text="PASTE YOUR SOURCE TEXT"
+                               FontSize="12"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                               Margin="0,0,0,4" />
+                    <ui:TextBox PlaceholderText="Paste your source text here..."
+                                Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                MinHeight="120"
+
+                                VerticalScrollBarVisibility="Auto"
+                                Margin="0,0,0,16" />
+
+                    <TextBlock Text="CITATION STYLE"
+                               FontSize="12"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                               Margin="0,0,0,4" />
+                    <ComboBox ItemsSource="{Binding AvailableStyles}"
+                             SelectedItem="{Binding SelectedStyle}"
+                             Margin="0,0,0,16" />
+
+                    <ui:Button Appearance="Primary"
+                               Command="{Binding GenerateCitationCommand}"
+                               IsEnabled="{Binding IsGenerating, Converter={StaticResource BoolNegate}}"
+                               HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="DocumentEdit24" Margin="0,0,8,0" />
+                            <TextBlock Text="Generate Citation" />
+                        </StackPanel>
+                    </ui:Button>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsGenerating, Converter={StaticResource BoolToVis}}" Margin="0,8,0,0">
+                        <ui:ProgressRing IsIndeterminate="True" Width="20" Height="20" Margin="0,0,8,0" />
+                        <TextBlock Text="Generating..." FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </ui:Card>
+
+            <TextBlock Text="{Binding ErrorMessage}"
+                       FontSize="12"
+                       Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                       Margin="0,0,0,8"
+                       Visibility="{Binding ErrorMessage, Converter={StaticResource BoolToVis}}" />
+
+            <ui:Card Padding="20" Margin="0,0,0,12"
+                     Visibility="{Binding HasResult, Converter={StaticResource BoolToVis}}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <ui:SymbolIcon Symbol="CardUi24"
+                                       FontSize="20"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       Margin="0,0,8,0" />
+                        <TextBlock Text="Result"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <Border Background="{DynamicResource ApplicationBackgroundBrush}"
+                            CornerRadius="8"
+                            Padding="16"
+                            Margin="0,0,0,16">
+                        <TextBox Text="{Binding GeneratedCitation, Mode=OneWay}"
+                                 IsReadOnly="True"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                 FontSize="13" />
+                    </Border>
+
+                    <ui:Button Appearance="Secondary"
+                               Command="{Binding CopyResultCommand}"
+                               HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="Copy24" Margin="0,0,6,0" />
+                            <TextBlock Text="Copy" />
+                        </StackPanel>
+                    </ui:Button>
+                </StackPanel>
+            </ui:Card>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

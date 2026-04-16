@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>assets\app.ico</ApplicationIcon>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AcademicAI.App</RootNamespace>
+    <AssemblyName>AcademicAI</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AcademicAI.Core\AcademicAI.Core.csproj" />
+    <ProjectReference Include="..\AcademicAI.Agents\AcademicAI.Agents.csproj" />
+    <ProjectReference Include="..\AcademicAI.Academic\AcademicAI.Academic.csproj" />
+    <ProjectReference Include="..\AcademicAI.Humanizer\AcademicAI.Humanizer.csproj" />
+    <ProjectReference Include="..\AcademicAI.Detection\AcademicAI.Detection.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WPF-UI" Version="3.0.5" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.0" />
+    <PackageReference Include="PdfPig" Version="0.1.9" />
+    <PackageReference Include="Markdig" Version="0.39.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\app.ico" />
+    <Content Include="assets\app.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>assets\app.ico</Link>
+    </Content>
+    <Content Include="assets\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>assets\logo.png</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Lang\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

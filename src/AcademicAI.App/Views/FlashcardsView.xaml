@@ -1,0 +1,74 @@
+<Page x:Class="AcademicAI.App.Views.FlashcardsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      Title="Flashcards">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="32">
+            <TextBlock Text="Flashcards" FontSize="20" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16" />
+            <ui:Card Padding="20" Margin="0,0,0,16">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <ui:SymbolIcon Symbol="DocumentAdd24" FontSize="20"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,8,0" />
+                        <TextBlock Text="Input" FontSize="14" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <ui:TextBox PlaceholderText="Enter a topic for flashcards..." Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"
+                                AcceptsReturn="True" TextWrapping="Wrap" MinHeight="100"
+                                VerticalScrollBarVisibility="Auto" Margin="0,0,0,12" />
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <StackPanel Margin="0,0,16,0">
+                            <TextBlock Text="Card Count" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,4" />
+                            <ui:TextBox Text="{Binding CardCount}" InputScope="Number" MinWidth="80" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Difficulty" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,4" />
+                            <ComboBox ItemsSource="{Binding AvailableDifficulties}" SelectedItem="{Binding Difficulty}" MinWidth="120" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:Button Appearance="Primary" Command="{Binding GenerateCardsCommand}"
+                                   IsEnabled="{Binding IsProcessing, Converter={StaticResource BoolNegate}}">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="DocumentAdd24" Margin="0,0,8,0" />
+                                <TextBlock Text="Generate Cards" />
+                            </StackPanel>
+                        </ui:Button>
+                        <ui:Button Appearance="Secondary" Command="{Binding CancelCommand}"
+                                   Visibility="{Binding IsProcessing, Converter={StaticResource BoolToVis}}"
+                                   Margin="8,0,0,0" Content="Cancel" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsProcessing, Converter={StaticResource BoolToVis}}" Margin="0,8,0,0">
+                        <ui:ProgressRing IsIndeterminate="True" Width="20" Height="20" Margin="0,0,8,0" />
+                        <TextBlock Text="Generating flashcards..." FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </ui:Card>
+
+            <TextBlock Text="{Binding ErrorMessage}" FontSize="12" Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                       Margin="0,0,0,8" Visibility="{Binding ErrorMessage, Converter={StaticResource BoolToVis}}" />
+
+            <!-- Interactive Flashcards -->
+            <StackPanel x:Name="CardsContainer"
+                        Visibility="{Binding HasResult, Converter={StaticResource BoolToVis}}">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                    <Border Width="3" CornerRadius="2"
+                            Background="{DynamicResource AccentTextFillColorPrimaryBrush}"
+                            Margin="0,0,10,0" />
+                    <ui:SymbolIcon Symbol="CardUi24" FontSize="20"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,8,0" />
+                    <TextBlock Text="Flashcards" FontSize="14" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" VerticalAlignment="Center" />
+                    <TextBlock x:Name="CardCountLabel" FontSize="12" Margin="12,0,0,0"
+                               Foreground="{DynamicResource TextFillColorTertiaryBrush}" VerticalAlignment="Center" />
+                </StackPanel>
+                <TextBlock Text="Click a card to reveal the answer" FontSize="11"
+                           Foreground="{DynamicResource TextFillColorTertiaryBrush}" Margin="0,0,0,12" />
+                <!-- Cards rendered from code-behind -->
+                <ItemsControl x:Name="FlashcardsList" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

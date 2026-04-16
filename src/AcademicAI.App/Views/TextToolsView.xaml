@@ -1,0 +1,22 @@
+<Page x:Class="AcademicAI.App.Views.TextToolsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      Title="Text Tools">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,16">
+            <ui:Button x:Name="Tab0Btn" Appearance="Primary" Content="Summarizer" Click="SelectTab0" />
+            <ui:Button x:Name="Tab1Btn" Appearance="Secondary" Content="Paraphraser" Click="SelectTab1" Margin="8,0,0,0" />
+            <ui:Button x:Name="Tab2Btn" Appearance="Secondary" Content="Humanizer" Click="SelectTab2" Margin="8,0,0,0" />
+            <ui:Button x:Name="Tab3Btn" Appearance="Secondary" Content="Translator" Click="SelectTab3" Margin="8,0,0,0" />
+            <ui:Button x:Name="Tab4Btn" Appearance="Secondary" Content="Detector" Click="SelectTab4" Margin="8,0,0,0" />
+        </StackPanel>
+
+        <Frame x:Name="TabContent" Grid.Row="1" NavigationUIVisibility="Hidden" JournalOwnership="OwnsJournal" />
+    </Grid>
+</Page>

@@ -1,0 +1,155 @@
+<Page x:Class="AcademicAI.App.Views.AcademicWriterView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:controls="clr-namespace:AcademicAI.App.Controls"
+      Title="Academic Writer">
+    <Grid Margin="28">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="16" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- LEFT: Compose Panel -->
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+
+                <!-- Page Header -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <ui:SymbolIcon Symbol="DocumentEdit24" FontSize="24"
+                                   Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
+                                   Margin="0,0,10,0" VerticalAlignment="Center" />
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Academic Writer" FontSize="20" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="AI-powered academic writing assistant"
+                                   FontSize="11"
+                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <ui:Card Padding="24">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <Border Width="3" CornerRadius="2"
+                                    Background="{DynamicResource AccentTextFillColorPrimaryBrush}"
+                                    Margin="0,0,10,0" />
+                            <TextBlock Text="Compose" FontSize="14" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <TextBlock Text="PROMPT" FontSize="11" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="0,0,0,6" />
+                        <ui:TextBox x:Name="PromptBox"
+                                    PlaceholderText="Describe what you want to write..."
+                                    Text="{Binding Prompt, UpdateSourceTrigger=PropertyChanged}"
+                                    AcceptsReturn="True" TextWrapping="Wrap"
+                                    MinHeight="120"
+                                    VerticalScrollBarVisibility="Auto"
+                                    Margin="0,0,0,4"
+                                    TextChanged="PromptBox_TextChanged" />
+                        <TextBlock x:Name="PromptCountLabel" FontSize="11"
+                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                   HorizontalAlignment="Right" Margin="0,0,0,16" />
+
+                        <TextBlock Text="TYPE" FontSize="11" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="0,0,0,6" />
+                        <ComboBox ItemsSource="{Binding AvailableTypes}"
+                                  SelectedItem="{Binding SelectedType}"
+                                  Margin="0,0,0,12" />
+
+                        <TextBlock Text="TONE" FontSize="11" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="0,0,0,6" />
+                        <ComboBox ItemsSource="{Binding AvailableTones}"
+                                  SelectedItem="{Binding SelectedTone}"
+                                  Margin="0,0,0,12" />
+
+                        <TextBlock Text="LENGTH" FontSize="11" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="0,0,0,6" />
+                        <ComboBox SelectedIndex="1" Margin="0,0,0,20">
+                            <ComboBoxItem Content="Short (~200 words)" />
+                            <ComboBoxItem Content="Medium (~500 words)" />
+                            <ComboBoxItem Content="Long (~1000 words)" />
+                            <ComboBoxItem Content="Extended (~2000 words)" />
+                        </ComboBox>
+
+                        <ui:Button Appearance="Primary"
+                                   Command="{Binding GenerateCommand}"
+                                   IsEnabled="{Binding IsGenerating, Converter={StaticResource BoolNegate}}"
+                                   HorizontalAlignment="Stretch">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Bot24" Margin="0,0,8,0" />
+                                <TextBlock Text="Generate" />
+                            </StackPanel>
+                        </ui:Button>
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding IsGenerating, Converter={StaticResource BoolToVis}}"
+                                    Margin="0,10,0,0">
+                            <ui:ProgressRing IsIndeterminate="True" Width="20" Height="20" Margin="0,0,8,0" />
+                            <TextBlock Text="Generating..." FontSize="12"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </StackPanel>
+                </ui:Card>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- RIGHT: Output Panel -->
+        <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+
+                <!-- Error -->
+                <TextBlock Text="{Binding ErrorMessage}" FontSize="12"
+                           Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                           Margin="0,0,0,8"
+                           Visibility="{Binding ErrorMessage, Converter={StaticResource BoolToVis}}" />
+
+                <ui:Card Padding="24">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <Border Width="3" CornerRadius="2"
+                                    Background="{DynamicResource SystemFillColorSuccessBrush}"
+                                    Margin="0,0,10,0" />
+                            <ui:SymbolIcon Symbol="DocumentText24" FontSize="18"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           Margin="0,0,8,0" />
+                            <TextBlock Text="Output" FontSize="14" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <controls:MarkdownViewer MarkdownText="{Binding GeneratedText}" />
+
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding HasResult, Converter={StaticResource BoolToVis}}"
+                                    Margin="0,16,0,0"
+                                    HorizontalAlignment="Right">
+                            <ui:Button Appearance="Secondary" Command="{Binding CopyResultCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="Copy24" Margin="0,0,6,0" />
+                                    <TextBlock Text="Copy" />
+                                </StackPanel>
+                            </ui:Button>
+                            <ui:Button Appearance="Primary" Command="{Binding SaveResultCommand}"
+                                       Margin="8,0,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="Save24" Margin="0,0,6,0" />
+                                    <TextBlock Text="Save" />
+                                </StackPanel>
+                            </ui:Button>
+                        </StackPanel>
+                    </StackPanel>
+                </ui:Card>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
