@@ -25,17 +25,28 @@ jobs:
       - name: Build
         run: dotnet build AcademicAI.sln -c Release --no-restore
 
-      - name: Publish
-        run: dotnet publish src/AcademicAI.App/AcademicAI.App.csproj -c Release -r win-x64 --self-contained true -o publish/
+      - name: Publish self-contained
+        run: dotnet publish src/AcademicAI.App/AcademicAI.App.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishTrimmed=false -o publish-sc/
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: AcademicAI-Suite
-          path: publish/
+      - name: Publish framework-dependent
+        run: dotnet publish src/AcademicAI.App/AcademicAI.App.csproj -c Release -r win-x64 --self-contained false -o publish-fdd/
+
+      - name: Remove PDBs from framework-dependent
+        shell: pwsh
+        run: Get-ChildItem -Path publish-fdd -Filter *.pdb -Recurse | Remove-Item -Force
+
+      - name: Create Lite zip
+        shell: pwsh
+        run: Compress-Archive -Path publish-fdd/* -DestinationPath AcademicAI-Suite-Lite.zip
+
+      - name: Rename single-file exe
+        shell: pwsh
+        run: Copy-Item publish-sc/AcademicAI.exe AcademicAI-Suite.exe
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: publish/**
+          files: |
+            AcademicAI-Suite.exe
+            AcademicAI-Suite-Lite.zip
           generate_release_notes: true

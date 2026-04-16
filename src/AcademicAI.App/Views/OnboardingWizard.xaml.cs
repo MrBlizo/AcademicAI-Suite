@@ -1,5 +1,6 @@
 using System.Windows;
-using AcademicAI.Agents;
+using System.Windows.Controls;
+using System.Windows.Media;
 using AcademicAI.Core.Interfaces;
 
 namespace AcademicAI.App.Views;
@@ -11,6 +12,10 @@ public partial class OnboardingWizard : Window
     private readonly IAgentFactory _agentFactory;
     private string _selectedProvider = "OpenRouter";
     private string _selectedLanguage = "en";
+    private int _currentStep = 1;
+
+    private static readonly SolidColorBrush ActiveBrush = new(Color.FromRgb(0x63, 0x66, 0xF1));
+    private static readonly SolidColorBrush InactiveBrush = SystemColors.ControlBrush;
 
     public OnboardingWizard(IAppSettingsService settingsService, ISecretStore secretStore, IAgentFactory agentFactory)
     {
@@ -20,6 +25,7 @@ public partial class OnboardingWizard : Window
         InitializeComponent();
         LoadProviders();
         LoadLanguages();
+        UpdateStepUI();
     }
 
     private void LoadProviders()
@@ -39,7 +45,7 @@ public partial class OnboardingWizard : Window
         LanguageCombo.SelectedIndex = 0;
     }
 
-    private void ProviderCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    private void ProviderCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (ProviderCombo.SelectedItem is string provider)
         {
@@ -48,18 +54,37 @@ public partial class OnboardingWizard : Window
             foreach (var model in _agentFactory.GetModelsForProvider(provider))
                 ModelCombo.Items.Add(model);
             if (ModelCombo.Items.Count > 0) ModelCombo.SelectedIndex = 0;
-
-            CloudflareFields.Visibility = provider == "Cloudflare" ? Visibility.Visible : Visibility.Collapsed;
-            StandardKeyField.Visibility = provider != "Cloudflare" ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 
-    private void LanguageCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    private void LanguageCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         _selectedLanguage = LanguageCombo.SelectedIndex switch
         {
             0 => "en", 1 => "ar", 2 => "fr", 3 => "es", 4 => "de", _ => "en"
         };
+    }
+
+    private void NextBtn_Click(object sender, RoutedEventArgs e)
+    {
+        if (_currentStep < 3)
+        {
+            _currentStep++;
+            UpdateStepUI();
+        }
+        else
+        {
+            Finish();
+        }
+    }
+
+    private void BackBtn_Click(object sender, RoutedEventArgs e)
+    {
+        if (_currentStep > 1)
+        {
+            _currentStep--;
+            UpdateStepUI();
+        }
     }
 
     private void SkipBtn_Click(object sender, RoutedEventArgs e)
@@ -69,27 +94,54 @@ public partial class OnboardingWizard : Window
         Close();
     }
 
-    private void GetStartedBtn_Click(object sender, RoutedEventArgs e)
+    private void UpdateStepUI()
     {
-        _settingsService.Settings.Language = _selectedLanguage;
+        Step1Content.Visibility = _currentStep == 1 ? Visibility.Visible : Visibility.Collapsed;
+        Step2Content.Visibility = _currentStep == 2 ? Visibility.Visible : Visibility.Collapsed;
+        Step3Content.Visibility = _currentStep == 3 ? Visibility.Visible : Visibility.Collapsed;
 
-        if (_selectedProvider == "Cloudflare")
+        Step1Circle.Background = _currentStep >= 1 ? ActiveBrush : InactiveBrush;
+        Step2Circle.Background = _currentStep >= 2 ? ActiveBrush : InactiveBrush;
+        Step3Circle.Background = _currentStep >= 3 ? ActiveBrush : InactiveBrush;
+        StepLine1.Background = _currentStep >= 2 ? ActiveBrush : InactiveBrush;
+        StepLine2.Background = _currentStep >= 3 ? ActiveBrush : InactiveBrush;
+
+        BackBtn.Visibility = _currentStep > 1 ? Visibility.Visible : Visibility.Collapsed;
+        SkipBtn.Visibility = _currentStep < 3 ? Visibility.Visible : Visibility.Collapsed;
+
+        if (_currentStep == 3)
         {
-            var accountId = CloudflareAccountId.Text.Trim();
-            var apiToken = CloudflareApiToken.Password.Trim();
-            if (!string.IsNullOrEmpty(accountId) && !string.IsNullOrEmpty(apiToken))
-            {
-                _secretStore.Save("apikey_Cloudflare", $"{accountId}|{apiToken}");
-                _secretStore.Save("cloudflare_accountid", accountId);
-                _secretStore.Save("cloudflare_apitoken", apiToken);
-            }
+            NextBtnText.Text = "Get Started";
         }
         else
         {
-            var apiKey = ApiKeyBox.Password.Trim();
-            if (!string.IsNullOrEmpty(apiKey))
-                _secretStore.Save($"apikey_{_selectedProvider}", apiKey);
+            NextBtnText.Text = "Next";
         }
+
+        TitleText.Text = _currentStep switch
+        {
+            1 => "Welcome to AcademicAI Suite",
+            2 => "Choose Your AI Provider",
+            3 => "Enter Your API Key",
+            _ => "Welcome to AcademicAI Suite"
+        };
+
+        SubtitleText.Text = _currentStep switch
+        {
+            1 => "Set up your language and AI provider to get started.",
+            2 => "Select which AI provider and model you'd like to use.",
+            3 => "Your key is encrypted locally and never sent to our servers.",
+            _ => ""
+        };
+    }
+
+    private void Finish()
+    {
+        _settingsService.Settings.Language = _selectedLanguage;
+
+        var apiKey = ApiKeyBox.Password.Trim();
+        if (!string.IsNullOrEmpty(apiKey))
+            _secretStore.Save($"apikey_{_selectedProvider}", apiKey);
 
         if (ModelCombo.SelectedItem is string model)
         {
