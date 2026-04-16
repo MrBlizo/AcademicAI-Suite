@@ -41,3 +41,8 @@ startup.log
 
 ## WPF temp
 *_wpftmp*
+
+## Publish output
+publish/
+publish-sc/
+publish-fdd/
