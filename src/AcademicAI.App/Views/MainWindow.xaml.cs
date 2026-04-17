@@ -58,8 +58,7 @@ public partial class MainWindow : FluentWindow
         var hwnd = new WindowInteropHelper(this).Handle;
         try
         {
-            var asm = Assembly.GetExecutingAssembly();
-            var exeDir = System.IO.Path.GetDirectoryName(asm.Location)!;
+            var exeDir = AppContext.BaseDirectory.TrimEnd(System.IO.Path.DirectorySeparatorChar);
 
             // Find the PNG logo for WPF Window.Icon + TitleBar.Icon
             var logoCandidates = new[]
