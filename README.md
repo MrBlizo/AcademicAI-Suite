@@ -58,11 +58,11 @@
 
 | Dashboard | Study Hub | Writer |
 |:---:|:---:|:---:|
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Study Hub](docs/screenshots/studyhub.png) | ![Writer](docs/screenshots/writer.png) |
+| ![Dashboard](https://raw.githubusercontent.com/MrBlizo/AcademicAI-Suite/24b17bd/docs/screenshots/dashboard.png) | ![Study Hub](https://raw.githubusercontent.com/MrBlizo/AcademicAI-Suite/24b17bd/docs/screenshots/studyhub.png) | ![Writer](https://raw.githubusercontent.com/MrBlizo/AcademicAI-Suite/24b17bd/docs/screenshots/writer.png) |
 
 | Planner | Text Tools | Research |
 |:---:|:---:|:---:|
-| ![Planner](docs/screenshots/planner.png) | ![Text Tools](docs/screenshots/texttools.png) | ![Research](docs/screenshots/Research.png) |
+| ![Planner](https://raw.githubusercontent.com/MrBlizo/AcademicAI-Suite/24b17bd/docs/screenshots/planner.png) | ![Text Tools](https://raw.githubusercontent.com/MrBlizo/AcademicAI-Suite/24b17bd/docs/screenshots/texttools.png) | ![Research](https://raw.githubusercontent.com/MrBlizo/AcademicAI-Suite/24b17bd/docs/screenshots/Research.png) |
 
 ---
 
