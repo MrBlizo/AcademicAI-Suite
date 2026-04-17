@@ -228,8 +228,12 @@ public partial class App : Application
     {
         _trayIcon = new TaskbarIcon();
         _trayIcon.ToolTipText = "AcademicAI Suite";
-        _trayIcon.IconSource = new System.Windows.Media.Imaging.BitmapImage(
-            new Uri("pack://application:,,,/assets/app.ico"));
+        var icoPath = System.IO.Path.Combine(AppContext.BaseDirectory, "assets", "app.ico");
+        if (System.IO.File.Exists(icoPath))
+        {
+            using var stream = System.IO.File.OpenRead(icoPath);
+            _trayIcon.Icon = new System.Drawing.Icon(stream);
+        }
         _trayIcon.TrayLeftMouseDown += (_, _) => ShowMainWindow(mainWindow);
 
         var contextMenu = new ContextMenu();

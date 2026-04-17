@@ -23,16 +23,20 @@
     <PackageReference Include="Markdig" Version="0.39.1" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\app.ico" />
-    <Content Include="assets\app.ico">
+    <None Include="assets\app.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>assets\app.ico</Link>
-    </Content>
-    <Content Include="assets\logo.png">
+    </None>
+    <None Include="assets\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>assets\logo.png</Link>
-    </Content>
+    </None>
   </ItemGroup>
+  <Target Name="CopyAssetsToPublish" AfterTargets="Publish">
+    <MakeDir Directories="$(PublishDir)assets" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\assets\app.ico" DestinationFolder="$(PublishDir)assets" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\assets\logo.png" DestinationFolder="$(PublishDir)assets" SkipUnchangedFiles="true" />
+  </Target>
   <ItemGroup>
     <None Update="Lang\*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
