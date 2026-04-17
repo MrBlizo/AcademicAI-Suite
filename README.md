@@ -54,18 +54,6 @@
 
 ---
 
-## Screenshots
-
-| Dashboard | Study Hub | Writer |
-|:---:|:---:|:---:|
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Study Hub](docs/screenshots/studyhub.png) | ![Writer](docs/screenshots/writer.png) |
-
-| Planner | Text Tools | Research |
-|:---:|:---:|:---:|
-| ![Planner](docs/screenshots/planner.png) | ![Text Tools](docs/screenshots/texttools.png) | ![Research](docs/screenshots/Research.png) |
-
----
-
 ## Download
 
 [**Download v3.0.0**](https://github.com/MrBlizo/AcademicAI-Suite/releases/latest)
