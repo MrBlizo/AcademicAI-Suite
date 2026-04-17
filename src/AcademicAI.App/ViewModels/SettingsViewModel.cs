@@ -124,35 +124,52 @@ public partial class SettingsViewModel : ObservableObject
             SelectedTheme = settings.Theme;
             MinimizeToTray = settings.MinimizeToTray;
             ClipboardMonitorEnabled = settings.ClipboardMonitorEnabled;
+        }
+        catch (Exception ex) { App.LogStartup($"SettingsViewModel.LoadSettings (settings): {ex.Message}"); }
 
+        try
+        {
             var licenseService = App.Services.GetRequiredService<ILicenseService>();
             var licenseInfo = licenseService.GetLicenseInfo();
             LicenseKey = licenseInfo.Key;
+        }
+        catch (Exception ex) { App.LogStartup($"SettingsViewModel.LoadSettings (license): {ex.Message}"); }
 
-            AppVersion = typeof(SettingsViewModel).Assembly.GetName().Version?.ToString() ?? "1.0.0";
+        AppVersion = typeof(SettingsViewModel).Assembly.GetName().Version?.ToString() ?? "1.0.0";
 
+        try
+        {
             var tokenTracker = App.Services.GetRequiredService<ITokenTrackerService>();
             var usage = tokenTracker.GetTotalUsage();
             TotalCalls = usage.TotalCalls;
             TotalTokens = usage.TotalPromptTokens + usage.TotalCompletionTokens;
             EstimatedCost = $"${usage.EstimatedCost:F4}";
+        }
+        catch (Exception ex) { App.LogStartup($"SettingsViewModel.LoadSettings (tokens): {ex.Message}"); }
 
+        try
+        {
             var agentFactory = App.Services.GetRequiredService<IAgentFactory>();
-            var secretStore = App.Services.GetRequiredService<ISecretStore>();
-
             FeatureDefaultItems.Clear();
-            foreach (var fd in settings.FeatureDefaults.Values)
+            var settingsService2 = App.Services.GetRequiredService<IAppSettingsService>();
+            foreach (var fd in settingsService2.Settings.FeatureDefaults.Values)
             {
                 FeatureDefaultItems.Add(new FeatureDefaultItem(fd.Feature, fd.Provider, fd.Model, agentFactory));
             }
+        }
+        catch (Exception ex) { App.LogStartup($"SettingsViewModel.LoadSettings (feature defaults): {ex.Message}"); }
 
+        try
+        {
+            var secretStore = App.Services.GetRequiredService<ISecretStore>();
             ProviderConfigItems.Clear();
             foreach (var (name, desc) in Providers)
             {
                 ProviderConfigItems.Add(new ProviderConfigItem(name, desc, secretStore));
             }
+            App.LogStartup($"SettingsViewModel loaded {ProviderConfigItems.Count} providers");
         }
-        catch { }
+        catch (Exception ex) { App.LogStartup($"SettingsViewModel.LoadSettings (providers): {ex.Message}"); }
     }
 
     [RelayCommand]

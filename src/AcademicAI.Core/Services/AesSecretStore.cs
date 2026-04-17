@@ -25,8 +25,16 @@ public class AesSecretStore : ISecretStore
     {
         var filePath = GetFilePath(key);
         if (!File.Exists(filePath)) return null;
-        var encrypted = File.ReadAllText(filePath);
-        return AesHelper.Decrypt(encrypted);
+        try
+        {
+            var encrypted = File.ReadAllText(filePath);
+            return AesHelper.Decrypt(encrypted);
+        }
+        catch
+        {
+            try { File.Delete(filePath); } catch { }
+            return null;
+        }
     }
 
     public void Delete(string key)

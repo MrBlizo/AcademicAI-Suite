@@ -5,8 +5,6 @@
       xmlns:local="clr-namespace:AcademicAI.App.Views"
       Title="Settings">
     <Page.Resources>
-        <local:ConfiguredBrushConverter x:Key="ConfiguredBrushConverter" />
-        <local:ConfiguredTextConverter x:Key="ConfiguredTextConverter" />
         <local:StringVisibilityConverter x:Key="StringVisibilityConverter" />
     </Page.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
@@ -179,86 +177,103 @@
                                FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                Margin="0,0,0,16" />
 
-                    <ItemsControl ItemsSource="{Binding ProviderConfigItems}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ui:CardExpander Margin="0,0,0,10">
-                                    <ui:CardExpander.Header>
-                                        <Grid VerticalAlignment="Center">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <ui:SymbolIcon Grid.Column="0" Margin="0,0,10,0"
-                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}">
-                                                <ui:SymbolIcon.Style>
-                                                    <Style TargetType="ui:SymbolIcon">
-                                                        <Setter Property="Symbol" Value="Server24" />
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding ProviderName}" Value="OpenRouter">
-                                                                <Setter Property="Symbol" Value="Globe24" />
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding ProviderName}" Value="Fireworks">
-                                                                <Setter Property="Symbol" Value="Fire24" />
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </ui:SymbolIcon.Style>
-                                            </ui:SymbolIcon>
-                                            <TextBlock Grid.Column="1" Text="{Binding ProviderName}"
-                                                       FontSize="14" FontWeight="SemiBold"
-                                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                       VerticalAlignment="Center" />
-                                            <Border Grid.Column="2" CornerRadius="4" Padding="8,3"
-                                                    Background="{Binding IsConfigured, Converter={StaticResource ConfiguredBrushConverter}}">
-                                                <TextBlock Text="{Binding IsConfigured, Converter={StaticResource ConfiguredTextConverter}}"
-                                                           FontSize="11" FontWeight="SemiBold"
-                                                           Foreground="{DynamicResource ApplicationBackgroundBrush}" />
-                                            </Border>
-                                        </Grid>
-                                    </ui:CardExpander.Header>
-                                    <StackPanel Margin="4,8,4,4">
-                                        <TextBlock Text="{Binding Description}" FontSize="12"
-                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                   Margin="0,0,0,16" />
-
-                                        <TextBlock Text="{DynamicResource Lbl_ApiKey}" FontSize="11" FontWeight="SemiBold"
-                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                   Margin="0,0,0,6" />
-                                        <ui:PasswordBox Password="{Binding ApiKey, UpdateSourceTrigger=PropertyChanged}"
-                                                        PasswordChanged="ApiKeyBox_PasswordChanged"
-                                                        PlaceholderText="Enter API key..."
-                                                        Margin="0,0,0,8" />
-
-                                        <TextBlock Text="{Binding TestResult}" FontSize="12"
-                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                   Margin="0,0,0,8"
-                                                   Visibility="{Binding TestResult, Converter={StaticResource StringVisibilityConverter}}" />
-
-                                        <StackPanel Orientation="Horizontal">
-                                            <ui:Button Appearance="Primary" Margin="0,0,8,0"
-                                                       Command="{Binding DataContext.SaveProviderKeyCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                       CommandParameter="{Binding}">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <ui:SymbolIcon Symbol="Save24" Margin="0,0,6,0" />
-                                                    <TextBlock Text="{DynamicResource Btn_SaveKey}" />
-                                                </StackPanel>
-                                            </ui:Button>
-                                            <ui:Button Appearance="Secondary"
-                                                       Command="{Binding DataContext.TestProviderCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                       CommandParameter="{Binding}">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <ui:SymbolIcon Symbol="PlugConnected24" Margin="0,0,6,0" />
-                                                    <TextBlock Text="{DynamicResource Btn_TestConnection}" />
-                                                </StackPanel>
-                                            </ui:Button>
-                                        </StackPanel>
+                    <!-- OpenRouter -->
+                    <ui:CardExpander Margin="0,0,0,10">
+                        <ui:CardExpander.Header>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <ui:SymbolIcon Symbol="Globe24" Margin="0,0,10,0"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                <TextBlock Text="OpenRouter" FontSize="14" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                           VerticalAlignment="Center" Margin="0,0,12,0" />
+                                <Border x:Name="OpenRouterBadge" CornerRadius="4" Padding="8,3"
+                                        Background="{DynamicResource SystemFillColorCriticalBrush}">
+                                    <TextBlock x:Name="OpenRouterBadgeText" FontSize="11" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource ApplicationBackgroundBrush}"
+                                               Text="{DynamicResource Lbl_NotConfigured}" />
+                                </Border>
+                            </StackPanel>
+                        </ui:CardExpander.Header>
+                        <StackPanel Margin="4,8,4,4">
+                            <TextBlock Text="Access multiple AI models through one API" FontSize="12"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       Margin="0,0,0,16" />
+                            <TextBlock Text="{DynamicResource Lbl_ApiKey}" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       Margin="0,0,0,6" />
+                            <ui:PasswordBox x:Name="OpenRouterKeyBox"
+                                            PlaceholderText="sk-or-..."
+                                            Margin="0,0,0,8" />
+                            <TextBlock x:Name="OpenRouterTestResult" FontSize="12"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       Margin="0,0,0,8" Visibility="Collapsed" />
+                            <StackPanel Orientation="Horizontal">
+                                <ui:Button Appearance="Primary" Margin="0,0,8,0"
+                                           Click="SaveOpenRouterKey_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <ui:SymbolIcon Symbol="Save24" Margin="0,0,6,0" />
+                                        <TextBlock Text="{DynamicResource Btn_SaveKey}" />
                                     </StackPanel>
-                                </ui:CardExpander>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                                </ui:Button>
+                                <ui:Button Appearance="Secondary"
+                                           Click="TestOpenRouter_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <ui:SymbolIcon Symbol="PlugConnected24" Margin="0,0,6,0" />
+                                        <TextBlock Text="{DynamicResource Btn_TestConnection}" />
+                                    </StackPanel>
+                                </ui:Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </ui:CardExpander>
+
+                    <!-- Fireworks -->
+                    <ui:CardExpander Margin="0,0,0,10">
+                        <ui:CardExpander.Header>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <ui:SymbolIcon Symbol="Fire24" Margin="0,0,10,0"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                <TextBlock Text="Fireworks" FontSize="14" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                           VerticalAlignment="Center" Margin="0,0,12,0" />
+                                <Border x:Name="FireworksBadge" CornerRadius="4" Padding="8,3"
+                                        Background="{DynamicResource SystemFillColorCriticalBrush}">
+                                    <TextBlock x:Name="FireworksBadgeText" FontSize="11" FontWeight="SemiBold"
+                                               Foreground="{DynamicResource ApplicationBackgroundBrush}"
+                                               Text="{DynamicResource Lbl_NotConfigured}" />
+                                </Border>
+                            </StackPanel>
+                        </ui:CardExpander.Header>
+                        <StackPanel Margin="4,8,4,4">
+                            <TextBlock Text="Fast open-source model inference" FontSize="12"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       Margin="0,0,0,16" />
+                            <TextBlock Text="{DynamicResource Lbl_ApiKey}" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       Margin="0,0,0,6" />
+                            <ui:PasswordBox x:Name="FireworksKeyBox"
+                                            PlaceholderText="fw-..."
+                                            Margin="0,0,0,8" />
+                            <TextBlock x:Name="FireworksTestResult" FontSize="12"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       Margin="0,0,0,8" Visibility="Collapsed" />
+                            <StackPanel Orientation="Horizontal">
+                                <ui:Button Appearance="Primary" Margin="0,0,8,0"
+                                           Click="SaveFireworksKey_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <ui:SymbolIcon Symbol="Save24" Margin="0,0,6,0" />
+                                        <TextBlock Text="{DynamicResource Btn_SaveKey}" />
+                                    </StackPanel>
+                                </ui:Button>
+                                <ui:Button Appearance="Secondary"
+                                           Click="TestFireworks_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <ui:SymbolIcon Symbol="PlugConnected24" Margin="0,0,6,0" />
+                                        <TextBlock Text="{DynamicResource Btn_TestConnection}" />
+                                    </StackPanel>
+                                </ui:Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </ui:CardExpander>
                 </StackPanel>
             </ui:Card>
 
