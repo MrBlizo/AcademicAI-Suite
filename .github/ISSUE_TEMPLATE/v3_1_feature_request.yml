@@ -1,0 +1,41 @@
+name: v3.1 Feature Request
+description: Suggest a feature for v3.1
+title: "[v3.1] "
+labels: ["enhancement", "v3.1-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for your feedback. Tell us what should be included in v3.1."
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you facing?
+      placeholder: Describe the pain point clearly
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      placeholder: Describe your suggested feature or change
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Study Hub
+        - Planner
+        - Research
+        - Writer
+        - Text Tools
+        - Settings
+        - Performance
+        - Localization
+        - Other
+  - type: textarea
+    id: extra_context
+    attributes:
+      label: Extra context
+      placeholder: Add screenshots, examples, or links
