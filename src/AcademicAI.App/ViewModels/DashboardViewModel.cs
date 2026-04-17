@@ -101,10 +101,10 @@ public partial class DashboardViewModel : ObservableObject
         }
         catch { }
 
-        RecentActivity.Add(new ActivityItem { Icon = SymbolRegular.Flash24, Title = "Generated flashcards on Machine Learning", Detail = "Study Hub", Timestamp = DateTime.Now.AddMinutes(-10) });
-        RecentActivity.Add(new ActivityItem { Icon = SymbolRegular.Translate24, Title = "Translated document to French", Detail = "Translator", Timestamp = DateTime.Now.AddMinutes(-45) });
-        RecentActivity.Add(new ActivityItem { Icon = SymbolRegular.DocumentText24, Title = "Summarized research paper", Detail = "Summarizer", Timestamp = DateTime.Now.AddHours(-2) });
-        RecentActivity.Add(new ActivityItem { Icon = SymbolRegular.Book24, Title = "Created 5 citations in APA format", Detail = "Citations", Timestamp = DateTime.Now.AddHours(-5) });
+        RecentActivity.Add(new ActivityItem { Icon = SymbolRegular.DocumentAdd24, Title = "Generated flashcards on Machine Learning", Detail = "Study Hub", Timestamp = DateTime.Now.AddMinutes(-10) });
+        RecentActivity.Add(new ActivityItem { Icon = SymbolRegular.Translate24, Title = "Translated document to French", Detail = "Text Tools", Timestamp = DateTime.Now.AddMinutes(-45) });
+        RecentActivity.Add(new ActivityItem { Icon = SymbolRegular.DocumentText24, Title = "Summarized research paper", Detail = "Text Tools", Timestamp = DateTime.Now.AddHours(-2) });
+        RecentActivity.Add(new ActivityItem { Icon = SymbolRegular.DocumentBulletList24, Title = "Created 5 citations in APA format", Detail = "Research", Timestamp = DateTime.Now.AddHours(-5) });
 
         UpcomingDeadlines.Clear();
         UpcomingDeadlines.Add(new Assignment { Title = "Research Paper Draft", Subject = "CS", DueDate = DateTime.Today.AddDays(2), Priority = "High" });

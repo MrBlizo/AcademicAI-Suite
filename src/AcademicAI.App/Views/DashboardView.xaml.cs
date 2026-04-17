@@ -14,10 +14,9 @@ public partial class DashboardView : Page
         DataContext = new DashboardViewModel();
     }
 
-    private void NavigateToWriter(object sender, MouseButtonEventArgs e) => NavigateTo(typeof(AcademicWriterView));
-    private void NavigateToTranslator(object sender, MouseButtonEventArgs e) => NavigateTo(typeof(TranslatorView));
-    private void NavigateToSummarizer(object sender, MouseButtonEventArgs e) => NavigateTo(typeof(SummarizerView));
-    private void NavigateToDetector(object sender, MouseButtonEventArgs e) => NavigateTo(typeof(DetectorView));
+    private void NavigateToStudyHub(object sender, MouseButtonEventArgs e) => NavigateTo(typeof(StudyHubView));
+    private void NavigateToWriter(object sender, MouseButtonEventArgs e) => NavigateTo(typeof(WriterView));
+    private void NavigateToTextTools(object sender, MouseButtonEventArgs e) => NavigateTo(typeof(TextToolsView));
 
     private void NavigateTo(Type pageType)
     {

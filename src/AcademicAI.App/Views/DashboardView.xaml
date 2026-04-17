@@ -171,7 +171,7 @@
                             <TextBlock Text="Focus" FontSize="13" FontWeight="SemiBold"
                                        Foreground="{DynamicResource SystemFillColorSuccessBrush}"
                                        Visibility="{Binding IsBreak, Converter={StaticResource InvertBoolToVis}}" />
-                            <ui:SymbolIcon Symbol="DrinkCoffee24" FontSize="14"
+                            <ui:SymbolIcon Symbol="Dismiss24" FontSize="14"
                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                            Margin="0,0,4,0"
                                            Visibility="{Binding IsBreak, Converter={StaticResource BoolToVis}}" />
@@ -295,44 +295,42 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="12" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <ui:Card Grid.Column="0" Padding="20" Cursor="Hand"
-                             MouseLeftButtonDown="NavigateToWriter">
+                             MouseLeftButtonDown="NavigateToStudyHub">
                         <StackPanel HorizontalAlignment="Center">
                             <Border Width="44" Height="44" CornerRadius="10"
                                     Background="#266366F1"
                                     HorizontalAlignment="Center" Margin="0,0,0,10">
-                                <ui:SymbolIcon Symbol="DocumentEdit24" FontSize="22"
+                                <ui:SymbolIcon Symbol="HatGraduation24" FontSize="22"
                                                Foreground="#818CF8"
                                                HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
-                            <TextBlock Text="Write" FontSize="12" FontWeight="SemiBold"
+                            <TextBlock Text="Study Hub" FontSize="12" FontWeight="SemiBold"
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                        HorizontalAlignment="Center" />
                         </StackPanel>
                     </ui:Card>
 
                     <ui:Card Grid.Column="2" Padding="20" Cursor="Hand"
-                             MouseLeftButtonDown="NavigateToTranslator">
+                             MouseLeftButtonDown="NavigateToWriter">
                         <StackPanel HorizontalAlignment="Center">
                             <Border Width="44" Height="44" CornerRadius="10"
                                     Background="#2610B981"
                                     HorizontalAlignment="Center" Margin="0,0,0,10">
-                                <ui:SymbolIcon Symbol="Translate24" FontSize="22"
+                                <ui:SymbolIcon Symbol="DocumentEdit24" FontSize="22"
                                                Foreground="#34D399"
                                                HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
-                            <TextBlock Text="Translate" FontSize="12" FontWeight="SemiBold"
+                            <TextBlock Text="Writer" FontSize="12" FontWeight="SemiBold"
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                        HorizontalAlignment="Center" />
                         </StackPanel>
                     </ui:Card>
 
                     <ui:Card Grid.Column="4" Padding="20" Cursor="Hand"
-                             MouseLeftButtonDown="NavigateToSummarizer">
+                             MouseLeftButtonDown="NavigateToTextTools">
                         <StackPanel HorizontalAlignment="Center">
                             <Border Width="44" Height="44" CornerRadius="10"
                                     Background="#26F59E0B"
@@ -341,23 +339,7 @@
                                                Foreground="#FBBF24"
                                                HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
-                            <TextBlock Text="Summarize" FontSize="12" FontWeight="SemiBold"
-                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                       HorizontalAlignment="Center" />
-                        </StackPanel>
-                    </ui:Card>
-
-                    <ui:Card Grid.Column="6" Padding="20" Cursor="Hand"
-                             MouseLeftButtonDown="NavigateToDetector">
-                        <StackPanel HorizontalAlignment="Center">
-                            <Border Width="44" Height="44" CornerRadius="10"
-                                    Background="#26EC4899"
-                                    HorizontalAlignment="Center" Margin="0,0,0,10">
-                                <ui:SymbolIcon Symbol="ShieldCheckmark24" FontSize="22"
-                                               Foreground="#F472B6"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                            <TextBlock Text="Detect AI" FontSize="12" FontWeight="SemiBold"
+                            <TextBlock Text="Text Tools" FontSize="12" FontWeight="SemiBold"
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                        HorizontalAlignment="Center" />
                         </StackPanel>
@@ -371,7 +353,7 @@
                     <Border Width="44" Height="44" CornerRadius="10"
                             Background="#2610B981"
                             Margin="0,0,16,0">
-                        <ui:SymbolIcon Symbol="Trophy24" FontSize="22"
+                        <ui:SymbolIcon Symbol="Clock24" FontSize="22"
                                        Foreground="#34D399"
                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
