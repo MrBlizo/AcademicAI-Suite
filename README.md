@@ -61,9 +61,9 @@
 |:---:|:---:|:---:|
 | ![Dashboard](docs/screenshots/dashboard.png) | ![Study Hub](docs/screenshots/studyhub.png) | ![Writer](docs/screenshots/writer.png) |
 
-| Planner | Text Tools | Settings |
+| Planner | Text Tools | Research |
 |:---:|:---:|:---:|
-| ![Planner](docs/screenshots/planner.png) | ![Text Tools](docs/screenshots/texttools.png) | ![Settings](docs/screenshots/settings.png) |
+| ![Planner](docs/screenshots/planner.png) | ![Text Tools](docs/screenshots/texttools.png) | ![Research](docs/screenshots/research.png) |
 
 ---
 
