@@ -57,7 +57,13 @@
 
 ## Screenshots
 
-> *Coming soon*
+| Dashboard | Study Hub | Writer |
+|:---:|:---:|:---:|
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Study Hub](docs/screenshots/studyhub.png) | ![Writer](docs/screenshots/writer.png) |
+
+| Planner | Text Tools | Settings |
+|:---:|:---:|:---:|
+| ![Planner](docs/screenshots/planner.png) | ![Text Tools](docs/screenshots/texttools.png) | ![Settings](docs/screenshots/settings.png) |
 
 ---
 
