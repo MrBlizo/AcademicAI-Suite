@@ -46,7 +46,6 @@
 ### Platform Features
 - **7 Languages** — English, Arabic (RTL), French, Spanish, German
 - **2 AI Providers** — OpenRouter & Fireworks (bring your own API key)
-- **Remote Kill Switch** — Deactivate app or revoke licenses remotely
 - **Auto-Update** — Automatic update checking with mandatory update support
 - **Fluent Design** — Windows 11 Mica backdrop, theme switching, system accent color
 - **System Tray** — Minimize to tray with context menu
