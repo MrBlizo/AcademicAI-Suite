@@ -32,20 +32,21 @@ public partial class MainWindow : FluentWindow
     {
         NavView.TitleBar = TitleBar;
 
+        var loc = Core.Services.LocalizationManager.Instance;
+
         var menuItems = new List<NavigationViewItem>
         {
-            new() { Content = "Dashboard", Tag = "Nav_Dashboard", Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 }, TargetPageType = typeof(DashboardView) },
-            new() { Content = "Study Hub", Tag = "Nav_StudyHub", Icon = new SymbolIcon { Symbol = SymbolRegular.HatGraduation24 }, TargetPageType = typeof(StudyHubView) },
-            new() { Content = "Planner", Tag = "Nav_Planner", Icon = new SymbolIcon { Symbol = SymbolRegular.CalendarMonth24 }, TargetPageType = typeof(PlannerView) },
-            new() { Content = "Research", Tag = "Nav_Research", Icon = new SymbolIcon { Symbol = SymbolRegular.Search24 }, TargetPageType = typeof(ResearchView) },
-            new() { Content = "Writer", Tag = "Nav_Writer", Icon = new SymbolIcon { Symbol = SymbolRegular.DocumentEdit24 }, TargetPageType = typeof(WriterView) },
-            new() { Content = "Text Tools", Tag = "Nav_TextTools", Icon = new SymbolIcon { Symbol = SymbolRegular.DocumentText24 }, TargetPageType = typeof(TextToolsView) },
+            new() { Content = loc?["Nav_Dashboard"] ?? "Dashboard", Tag = "Nav_Dashboard", Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 }, TargetPageType = typeof(DashboardView) },
+            new() { Content = loc?["Nav_StudyHub"] ?? "Study Hub", Tag = "Nav_StudyHub", Icon = new SymbolIcon { Symbol = SymbolRegular.HatGraduation24 }, TargetPageType = typeof(StudyHubView) },
+            new() { Content = loc?["Nav_Planner"] ?? "Planner", Tag = "Nav_Planner", Icon = new SymbolIcon { Symbol = SymbolRegular.CalendarMonth24 }, TargetPageType = typeof(PlannerView) },
+            new() { Content = loc?["Nav_Research"] ?? "Research", Tag = "Nav_Research", Icon = new SymbolIcon { Symbol = SymbolRegular.Search24 }, TargetPageType = typeof(ResearchView) },
+            new() { Content = loc?["Nav_Writer"] ?? "Writer", Tag = "Nav_Writer", Icon = new SymbolIcon { Symbol = SymbolRegular.DocumentEdit24 }, TargetPageType = typeof(WriterView) },
+            new() { Content = loc?["Nav_TextTools"] ?? "Text Tools", Tag = "Nav_TextTools", Icon = new SymbolIcon { Symbol = SymbolRegular.DocumentText24 }, TargetPageType = typeof(TextToolsView) },
         };
 
-        // Settings pinned to the bottom of the nav pane
         var footerItems = new List<NavigationViewItem>
         {
-            new() { Content = "Settings", Tag = "Nav_Settings", Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 }, TargetPageType = typeof(SettingsView) },
+            new() { Content = loc?["Nav_Settings"] ?? "Settings", Tag = "Nav_Settings", Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 }, TargetPageType = typeof(SettingsView) },
         };
 
         NavView.MenuItemsSource = menuItems;

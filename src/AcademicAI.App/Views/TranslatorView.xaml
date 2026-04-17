@@ -1,8 +1,7 @@
-<Page x:Class="AcademicAI.App.Views.TranslatorView"
+<UserControl x:Class="AcademicAI.App.Views.TranslatorView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      Title="Translator">
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Margin="28">
 
@@ -12,9 +11,9 @@
                                Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
                                Margin="0,0,12,0" VerticalAlignment="Center" />
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Translator" FontSize="22" FontWeight="SemiBold"
+                    <TextBlock Text="{DynamicResource Title_Translator}" FontSize="22" FontWeight="SemiBold"
                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                    <TextBlock Text="Translate text between languages with AI precision"
+                    <TextBlock Text="{DynamicResource Desc_Translator}"
                                FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                 </StackPanel>
             </StackPanel>
@@ -29,7 +28,7 @@
 
                 <ui:Card Grid.Column="0" Padding="20">
                     <StackPanel>
-                        <TextBlock Text="SOURCE LANGUAGE" FontSize="11" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_SourceLang}" FontSize="11" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="0,0,0,6" />
                         <ComboBox ItemsSource="{Binding Languages}"
@@ -47,7 +46,7 @@
 
                 <ui:Card Grid.Column="2" Padding="20">
                     <StackPanel>
-                        <TextBlock Text="TARGET LANGUAGE" FontSize="11" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_TargetLang}" FontSize="11" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="0,0,0,6" />
                         <ComboBox ItemsSource="{Binding Languages}"
@@ -63,7 +62,7 @@
                         <Border Width="3" CornerRadius="2"
                                 Background="{DynamicResource AccentTextFillColorPrimaryBrush}"
                                 Margin="0,0,10,0" />
-                        <TextBlock Text="Input" FontSize="14" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_Input}" FontSize="14" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                    VerticalAlignment="Center" />
                     </StackPanel>
@@ -89,14 +88,14 @@
                            IsEnabled="{Binding IsTranslating, Converter={StaticResource BoolNegate}}">
                     <StackPanel Orientation="Horizontal">
                         <ui:SymbolIcon Symbol="Translate24" Margin="0,0,8,0" />
-                        <TextBlock Text="Translate" />
+                        <TextBlock Text="{DynamicResource Btn_Translate}" />
                     </StackPanel>
                 </ui:Button>
                 <StackPanel Orientation="Horizontal"
                             Visibility="{Binding IsTranslating, Converter={StaticResource BoolToVis}}"
                             Margin="16,0,0,0">
                     <ui:ProgressRing IsIndeterminate="True" Width="20" Height="20" Margin="0,0,8,0" />
-                    <TextBlock Text="Translating..." FontSize="12"
+                    <TextBlock Text="{DynamicResource Msg_Generating}" FontSize="12"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                VerticalAlignment="Center" />
                 </StackPanel>
@@ -118,7 +117,7 @@
                         <ui:SymbolIcon Symbol="Translate24" FontSize="18"
                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                        Margin="0,0,8,0" />
-                        <TextBlock Text="Translation" FontSize="14" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_Output}" FontSize="14" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                    VerticalAlignment="Center" />
                     </StackPanel>
@@ -136,7 +135,7 @@
                                Command="{Binding CopyResultCommand}">
                         <StackPanel Orientation="Horizontal">
                             <ui:SymbolIcon Symbol="Copy24" Margin="0,0,6,0" />
-                            <TextBlock Text="Copy" />
+                            <TextBlock Text="{DynamicResource Btn_Copy}" />
                         </StackPanel>
                     </ui:Button>
                 </StackPanel>
@@ -144,4 +143,4 @@
 
         </StackPanel>
     </ScrollViewer>
-</Page>
+</UserControl>

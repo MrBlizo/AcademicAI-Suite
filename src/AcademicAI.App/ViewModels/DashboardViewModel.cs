@@ -112,6 +112,18 @@ public partial class DashboardViewModel : ObservableObject
         UpcomingDeadlines.Add(new Assignment { Title = "Lab Report", Subject = "Physics", DueDate = DateTime.Today.AddDays(7), Priority = "Low" });
     }
 
+    public void RefreshUsage()
+    {
+        try
+        {
+            var tokenTracker = App.Services.GetRequiredService<ITokenTrackerService>();
+            var usage = tokenTracker.GetTotalUsage();
+            AiUsageCalls = usage.TotalCalls;
+            AiUsageTokens = usage.TotalPromptTokens + usage.TotalCompletionTokens;
+        }
+        catch { }
+    }
+
     private void OnTimerTick(object? sender, EventArgs e)
     {
         if (_remainingTime.TotalSeconds <= 0)

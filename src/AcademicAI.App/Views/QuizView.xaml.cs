@@ -9,7 +9,7 @@ using AcademicAI.App.ViewModels;
 
 namespace AcademicAI.App.Views;
 
-public partial class QuizView : Page
+public partial class QuizView : UserControl
 {
     private readonly QuizViewModel _vm;
     private int _score;

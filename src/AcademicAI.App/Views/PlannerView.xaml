@@ -26,9 +26,9 @@
                                    Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
                                    Margin="0,0,10,0" VerticalAlignment="Center" />
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Planner" FontSize="20" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Title_Planner}" FontSize="20" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                        <TextBlock Text="Track assignments and stay on schedule"
+                        <TextBlock Text="{DynamicResource Desc_Planner}"
                                    FontSize="11"
                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                     </StackPanel>
@@ -44,19 +44,19 @@
                             <ui:SymbolIcon Symbol="DocumentAdd24" FontSize="18"
                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                            Margin="0,0,8,0" />
-                            <TextBlock Text="Add Assignment" FontSize="14" FontWeight="SemiBold"
+                            <TextBlock Text="{DynamicResource Lbl_AddAssignment}" FontSize="14" FontWeight="SemiBold"
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                        VerticalAlignment="Center" />
                         </StackPanel>
 
-                        <TextBlock Text="TITLE" FontSize="11" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_Title}" FontSize="11" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="0,0,0,6" />
                         <ui:TextBox PlaceholderText="Assignment title"
                                     Text="{Binding NewTitle, UpdateSourceTrigger=PropertyChanged}"
                                     Margin="0,0,0,12" />
 
-                        <TextBlock Text="SUBJECT" FontSize="11" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_Subject}" FontSize="11" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="0,0,0,6" />
                         <ui:TextBox PlaceholderText="Subject"
@@ -66,20 +66,20 @@
                         <TextBlock Text="CATEGORY" FontSize="11" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="0,0,0,6" />
-                        <ComboBox SelectedValue="{Binding NewCategory}" SelectedValuePath="Content"
+                        <ComboBox SelectedValue="{Binding NewCategory}" SelectedValuePath="Tag"
                                   Margin="0,0,0,12">
-                            <ComboBoxItem Content="Homework" />
-                            <ComboBoxItem Content="Exam" />
-                            <ComboBoxItem Content="Project" />
-                            <ComboBoxItem Content="Reading" />
+                            <ComboBoxItem Content="{DynamicResource Category_Homework}" Tag="Homework" />
+                            <ComboBoxItem Content="{DynamicResource Category_Exam}" Tag="Exam" />
+                            <ComboBoxItem Content="{DynamicResource Category_Project}" Tag="Project" />
+                            <ComboBoxItem Content="{DynamicResource Category_Reading}" Tag="Reading" />
                         </ComboBox>
 
-                        <TextBlock Text="DUE DATE" FontSize="11" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_DueDate}" FontSize="11" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="0,0,0,6" />
                         <DatePicker SelectedDate="{Binding NewDueDate}" Margin="0,0,0,12" />
 
-                        <TextBlock Text="PRIORITY" FontSize="11" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_Priority}" FontSize="11" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="0,0,0,6" />
                         <ComboBox SelectedValue="{Binding NewPriority}" SelectedValuePath="Content"
@@ -89,7 +89,7 @@
                             <ComboBoxItem Content="Low" />
                         </ComboBox>
 
-                        <TextBlock Text="NOTES" FontSize="11" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_Notes}" FontSize="11" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="0,0,0,6" />
                         <ui:TextBox PlaceholderText="Notes (optional)"
@@ -100,7 +100,7 @@
                                    HorizontalAlignment="Stretch">
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Symbol="DocumentAdd24" Margin="0,0,8,0" />
-                                <TextBlock Text="Add Assignment" />
+                                <TextBlock Text="{DynamicResource Btn_Add}" />
                             </StackPanel>
                         </ui:Button>
                     </StackPanel>
@@ -116,7 +116,7 @@
                             <ui:SymbolIcon Symbol="Clock24" FontSize="18"
                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                            Margin="0,0,8,0" />
-                            <TextBlock Text="Pomodoro Timer" FontSize="14" FontWeight="SemiBold"
+                            <TextBlock Text="{DynamicResource Lbl_PomodoroTimer}" FontSize="14" FontWeight="SemiBold"
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                        VerticalAlignment="Center" />
                         </StackPanel>
@@ -173,7 +173,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Column="0">
-                        <TextBlock Text="Assignments" FontSize="20" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_Assignments}" FontSize="20" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                    VerticalAlignment="Center" />
                         <Border CornerRadius="10" Padding="8,2"
@@ -189,7 +189,7 @@
                                VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <ui:SymbolIcon Symbol="Checkmark24" Margin="0,0,6,0" />
-                            <TextBlock Text="Clear Completed" />
+                            <TextBlock Text="{DynamicResource Btn_ClearCompleted}" />
                         </StackPanel>
                     </ui:Button>
                 </Grid>
@@ -197,26 +197,26 @@
                 <!-- Filter + Sort -->
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
                     <StackPanel Margin="0,0,16,0">
-                        <TextBlock Text="FILTER" FontSize="11" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_Filter}" FontSize="11" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="0,0,0,4" />
                         <ComboBox SelectedValue="{Binding FilterCategory}"
-                                  SelectedValuePath="Content">
-                            <ComboBoxItem Content="All" />
-                            <ComboBoxItem Content="Homework" />
-                            <ComboBoxItem Content="Exam" />
-                            <ComboBoxItem Content="Project" />
-                            <ComboBoxItem Content="Reading" />
+                                  SelectedValuePath="Tag">
+                            <ComboBoxItem Content="{DynamicResource Filter_All}" Tag="All" />
+                            <ComboBoxItem Content="{DynamicResource Category_Homework}" Tag="Homework" />
+                            <ComboBoxItem Content="{DynamicResource Category_Exam}" Tag="Exam" />
+                            <ComboBoxItem Content="{DynamicResource Category_Project}" Tag="Project" />
+                            <ComboBoxItem Content="{DynamicResource Category_Reading}" Tag="Reading" />
                         </ComboBox>
                     </StackPanel>
                     <StackPanel>
-                        <TextBlock Text="SORT BY" FontSize="11" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_SortBy}" FontSize="11" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    Margin="0,0,0,4" />
-                        <ComboBox SelectedValue="{Binding SortBy}" SelectedValuePath="Content">
-                            <ComboBoxItem Content="DueDate" />
-                            <ComboBoxItem Content="Priority" />
-                            <ComboBoxItem Content="Subject" />
+                        <ComboBox SelectedValue="{Binding SortBy}" SelectedValuePath="Tag">
+                            <ComboBoxItem Content="{DynamicResource Sort_DueDate}" Tag="DueDate" />
+                            <ComboBoxItem Content="Priority" Tag="Priority" />
+                            <ComboBoxItem Content="Subject" Tag="Subject" />
                         </ComboBox>
                     </StackPanel>
                 </StackPanel>
@@ -311,7 +311,7 @@
                     <ui:SymbolIcon Symbol="CalendarMonth24" FontSize="48"
                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                    HorizontalAlignment="Center" />
-                    <TextBlock Text="No assignments yet. Add one above!"
+                    <TextBlock Text="{DynamicResource Msg_NoAssignments}"
                                FontSize="13"
                                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                HorizontalAlignment="Center" Margin="0,12,0,0" />

@@ -39,11 +39,11 @@
                 </Grid.RowDefinitions>
 
                 <!-- App Title with accent color -->
-                <TextBlock Grid.Row="0" Text="AcademicAI Suite" FontSize="28" FontWeight="SemiBold"
+                <TextBlock Grid.Row="0" Text="{DynamicResource App_Name}" FontSize="28" FontWeight="SemiBold"
                            Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
 
                 <!-- Subtitle -->
-                <TextBlock Grid.Row="2" Text="Your AI-powered academic companion"
+                <TextBlock Grid.Row="2" Text="{DynamicResource Desc_AppSplash}"
                            FontSize="13"
                            Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
 
@@ -56,7 +56,7 @@
                              Height="4" />
 
                 <!-- Status Text -->
-                <TextBlock x:Name="StatusText" Grid.Row="8" Text="Initializing..."
+                <TextBlock x:Name="StatusText" Grid.Row="8" Text="{DynamicResource Msg_Initializing}"
                            FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
             </Grid>
         </Grid>

@@ -9,6 +9,7 @@ namespace AcademicAI.Agents;
 public class OpenAiCompatibleAgent : IAIAgent
 {
     private readonly HttpClient _http;
+    private readonly ITokenTrackerService? _tokenTracker;
     private string _apiKey = "";
     private string _model = "";
     private readonly string _baseUrl;
@@ -17,11 +18,12 @@ public class OpenAiCompatibleAgent : IAIAgent
 
     public string Name => _providerName;
 
-    public OpenAiCompatibleAgent(string providerName, string baseUrl, string defaultModel, Action<HttpRequestMessage>? configureRequest = null)
+    public OpenAiCompatibleAgent(string providerName, string baseUrl, string defaultModel, ITokenTrackerService? tokenTracker = null, Action<HttpRequestMessage>? configureRequest = null)
     {
         _providerName = providerName;
         _baseUrl = baseUrl;
         _model = defaultModel;
+        _tokenTracker = tokenTracker;
         _configureRequest = configureRequest;
         _http = new HttpClient { Timeout = TimeSpan.FromMinutes(5) };
     }
@@ -54,7 +56,25 @@ public class OpenAiCompatibleAgent : IAIAgent
 
         var responseJson = await response.Content.ReadAsStringAsync();
         using var doc = JsonDocument.Parse(responseJson);
-        return doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString() ?? "";
+
+        var content = doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString() ?? "";
+
+        if (_tokenTracker != null)
+        {
+            try
+            {
+                if (doc.RootElement.TryGetProperty("usage", out var usage))
+                {
+                    var promptTokens = usage.TryGetProperty("prompt_tokens", out var pt) ? pt.GetInt32() : 0;
+                    var completionTokens = usage.TryGetProperty("completion_tokens", out var ct) ? ct.GetInt32() : 0;
+                    var estimatedCost = ProviderModels.EstimateCost(_providerName, _model, promptTokens, completionTokens);
+                    _tokenTracker.RecordUsage(_providerName, _model, promptTokens, completionTokens, estimatedCost);
+                }
+            }
+            catch { }
+        }
+
+        return content;
     }
 
     public async Task<(bool Success, string Error)> TestConnectionWithDetailsAsync()

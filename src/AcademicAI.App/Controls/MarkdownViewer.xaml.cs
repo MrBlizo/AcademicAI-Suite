@@ -28,7 +28,9 @@ public partial class MarkdownViewer : UserControl
         // Navigate to a dark blank page immediately to avoid white flash
         try
         {
-            Browser.NavigateToString("<html><body style='background:#2a2a2e;margin:0;'></body></html>");
+            var isDark = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme() == Wpf.Ui.Appearance.ApplicationTheme.Dark;
+            var bg = isDark ? "#2a2a2e" : "#ffffff";
+            Browser.NavigateToString($"<html><body style='background:{bg};margin:0;'></body></html>");
         }
         catch { }
     }

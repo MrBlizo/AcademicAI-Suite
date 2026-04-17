@@ -24,13 +24,13 @@
             <ui:SymbolIcon Symbol="HatGraduation24" FontSize="28"
                            Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
                            Margin="0,0,12,0" VerticalAlignment="Center" />
-            <TextBlock x:Name="TitleText" Text="Welcome to AcademicAI Suite" FontSize="22" FontWeight="SemiBold"
+            <TextBlock x:Name="TitleText" Text="{DynamicResource Title_OnboardingWelcome}" FontSize="22" FontWeight="SemiBold"
                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                        VerticalAlignment="Center" />
         </StackPanel>
 
         <TextBlock x:Name="SubtitleText" Grid.Row="2"
-                   Text="Set up your language and AI provider to get started."
+                   Text="{DynamicResource Desc_OnboardingSubtitle}"
                    FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
 
         <!-- Step Indicator -->
@@ -62,22 +62,22 @@
         <Grid Grid.Row="6">
             <!-- Step 1: Language -->
             <StackPanel x:Name="Step1Content">
-                <TextBlock Text="Choose your preferred language" FontSize="15" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Lbl_ChooseLanguage}" FontSize="15" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16" />
                 <ComboBox x:Name="LanguageCombo" FontSize="14"
                           SelectionChanged="LanguageCombo_SelectionChanged" />
-                <TextBlock Text="You can change this later in Settings" FontSize="12"
+                <TextBlock Text="{DynamicResource Msg_ChangeInSettings}" FontSize="12"
                            Foreground="{DynamicResource TextFillColorTertiaryBrush}" Margin="0,12,0,0" />
             </StackPanel>
 
             <!-- Step 2: AI Provider -->
             <StackPanel x:Name="Step2Content" Visibility="Collapsed">
-                <TextBlock Text="Select your AI provider" FontSize="15" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Lbl_SelectProvider}" FontSize="15" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16" />
                 <ComboBox x:Name="ProviderCombo" FontSize="14"
                           SelectionChanged="ProviderCombo_SelectionChanged" Margin="0,0,0,16" />
 
-                <TextBlock Text="Select a model" FontSize="15" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Lbl_SelectModel}" FontSize="15" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,8" />
                 <ComboBox x:Name="ModelCombo" FontSize="14" />
 
@@ -86,10 +86,10 @@
                            TextWrapping="Wrap">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Text" Value="Get your API key at openrouter.ai/keys" />
+                            <Setter Property="Text" Value="{DynamicResource Msg_GetApiKey_OpenRouter}" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding ElementName=ProviderCombo, Path=SelectedItem}" Value="Fireworks">
-                                    <Setter Property="Text" Value="Get your API key at fireworks.ai/api-keys" />
+                                    <Setter Property="Text" Value="{DynamicResource Msg_GetApiKey_Fireworks}" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -99,24 +99,24 @@
 
             <!-- Step 3: API Key -->
             <StackPanel x:Name="Step3Content" Visibility="Collapsed">
-                <TextBlock Text="Enter your API key" FontSize="15" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Lbl_EnterApiKey}" FontSize="15" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16" />
                 <ui:PasswordBox x:Name="ApiKeyBox" PlaceholderText="Enter your API key..." Margin="0,0,0,16" />
                 <TextBlock TextWrapping="Wrap" FontSize="12"
                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                           Text="Your API key is encrypted and stored locally on this machine. It is never sent to our servers." />
+                           Text="{DynamicResource Msg_ApiKeySecurity}" />
             </StackPanel>
         </Grid>
 
         <!-- Navigation Buttons -->
         <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
-            <ui:Button x:Name="BackBtn" Content="Back" Appearance="Secondary"
+            <ui:Button x:Name="BackBtn" Content="{DynamicResource Btn_Back}" Appearance="Secondary"
                        Click="BackBtn_Click" Visibility="Collapsed" Margin="0,0,8,0" />
-            <ui:Button x:Name="SkipBtn" Content="Skip" Appearance="Secondary"
+            <ui:Button x:Name="SkipBtn" Content="{DynamicResource Btn_Skip}" Appearance="Secondary"
                        Click="SkipBtn_Click" Margin="0,0,8,0" />
             <ui:Button x:Name="NextBtn" Appearance="Primary" Click="NextBtn_Click">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="NextBtnText" Text="Next" />
+                    <TextBlock x:Name="NextBtnText" Text="{DynamicResource Btn_Next}" />
                     <ui:SymbolIcon Symbol="ArrowRight24" Margin="6,0,0,0" />
                 </StackPanel>
             </ui:Button>

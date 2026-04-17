@@ -18,9 +18,9 @@
                                Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
                                Margin="0,0,12,0" VerticalAlignment="Center" />
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Settings" FontSize="22" FontWeight="SemiBold"
+                    <TextBlock Text="{DynamicResource Title_Settings}" FontSize="22" FontWeight="SemiBold"
                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                    <TextBlock Text="Manage your preferences and API keys"
+                    <TextBlock Text="{DynamicResource Desc_Settings}"
                                FontSize="12"
                                Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                 </StackPanel>
@@ -34,13 +34,13 @@
                 <ui:SymbolIcon Symbol="Globe24" FontSize="18"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                Margin="0,0,8,0" />
-                <TextBlock Text="Language &amp; Theme" FontSize="14" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Lbl_LanguageTheme}" FontSize="14" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                            VerticalAlignment="Center" />
             </StackPanel>
             <ui:Card Margin="0,0,0,20">
                 <StackPanel Margin="20">
-                    <TextBlock Text="LANGUAGE" FontSize="11" FontWeight="SemiBold"
+                    <TextBlock Text="{DynamicResource Settings_Language}" FontSize="11" FontWeight="SemiBold"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,6" />
                     <ComboBox x:Name="LanguageComboBox" Width="240" HorizontalAlignment="Left"
                               SelectedValue="{Binding SelectedLanguage}" SelectedValuePath="Tag"
@@ -52,7 +52,7 @@
                         <ComboBoxItem Content="🇩🇪  Deutsch" Tag="de" />
                     </ComboBox>
 
-                    <TextBlock Text="THEME" FontSize="11" FontWeight="SemiBold"
+                    <TextBlock Text="{DynamicResource Settings_Theme}" FontSize="11" FontWeight="SemiBold"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,8" />
                     <StackPanel Orientation="Horizontal">
                         <ui:Button x:Name="DarkThemeButton" Appearance="Primary" Margin="0,0,8,0"
@@ -81,7 +81,7 @@
                 <ui:SymbolIcon Symbol="Options24" FontSize="18"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                Margin="0,0,8,0" />
-                <TextBlock Text="General" FontSize="14" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Lbl_General}" FontSize="14" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                            VerticalAlignment="Center" />
             </StackPanel>
@@ -90,9 +90,9 @@
                     <ui:CardControl Margin="0,0,0,8">
                         <ui:CardControl.Header>
                             <StackPanel>
-                                <TextBlock Text="Minimize to Tray" FontSize="13" FontWeight="SemiBold"
+                                <TextBlock Text="{DynamicResource Settings_MinimizeToTray}" FontSize="13" FontWeight="SemiBold"
                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                <TextBlock Text="Keep app running in the system tray when closed"
+                                <TextBlock Text="{DynamicResource Desc_MinimizeToTray}"
                                            FontSize="11"
                                            Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                             </StackPanel>
@@ -104,7 +104,7 @@
                             <StackPanel>
                                 <TextBlock Text="Clipboard Monitor" FontSize="13" FontWeight="SemiBold"
                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                <TextBlock Text="Automatically capture copied text entries"
+                                <TextBlock Text="{DynamicResource Desc_ClipboardMonitor}"
                                            FontSize="11"
                                            Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                             </StackPanel>
@@ -122,13 +122,13 @@
                 <ui:SymbolIcon Symbol="Bot24" FontSize="18"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                Margin="0,0,8,0" />
-                <TextBlock Text="Default AI Providers" FontSize="14" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Settings_DefaultProviders}" FontSize="14" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                            VerticalAlignment="Center" />
             </StackPanel>
             <ui:Card Margin="0,0,0,20">
                 <StackPanel Margin="20">
-                    <TextBlock Text="Choose the default AI provider and model for each feature"
+                    <TextBlock Text="{DynamicResource Desc_DefaultProviders}"
                                FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                Margin="0,0,0,16" />
                     <ItemsControl ItemsSource="{Binding FeatureDefaultItems}">
@@ -155,7 +155,7 @@
                                Command="{Binding SaveFeatureDefaultsCommand}">
                         <StackPanel Orientation="Horizontal">
                             <ui:SymbolIcon Symbol="Save24" Margin="0,0,6,0" />
-                            <TextBlock Text="Save Defaults" />
+                            <TextBlock Text="{DynamicResource Btn_SaveDefaults}" />
                         </StackPanel>
                     </ui:Button>
                 </StackPanel>
@@ -169,13 +169,13 @@
                 <ui:SymbolIcon Symbol="Key24" FontSize="18"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                Margin="0,0,8,0" />
-                <TextBlock Text="API Keys" FontSize="14" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Lbl_ApiKeys}" FontSize="14" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                            VerticalAlignment="Center" />
             </StackPanel>
             <ui:Card Margin="0,0,0,20" Padding="24">
                 <StackPanel>
-                    <TextBlock Text="Enter your API keys for each provider. Keys are stored encrypted locally."
+                    <TextBlock Text="{DynamicResource Desc_ApiKeys}"
                                FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                Margin="0,0,0,16" />
 
@@ -223,7 +223,7 @@
                                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                                    Margin="0,0,0,16" />
 
-                                        <TextBlock Text="API KEY" FontSize="11" FontWeight="SemiBold"
+                                        <TextBlock Text="{DynamicResource Lbl_ApiKey}" FontSize="11" FontWeight="SemiBold"
                                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                                    Margin="0,0,0,6" />
                                         <ui:PasswordBox Password="{Binding ApiKey, UpdateSourceTrigger=PropertyChanged}"
@@ -242,7 +242,7 @@
                                                        CommandParameter="{Binding}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <ui:SymbolIcon Symbol="Save24" Margin="0,0,6,0" />
-                                                    <TextBlock Text="Save Key" />
+                                                    <TextBlock Text="{DynamicResource Btn_SaveKey}" />
                                                 </StackPanel>
                                             </ui:Button>
                                             <ui:Button Appearance="Secondary"
@@ -250,7 +250,7 @@
                                                        CommandParameter="{Binding}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <ui:SymbolIcon Symbol="PlugConnected24" Margin="0,0,6,0" />
-                                                    <TextBlock Text="Test Connection" />
+                                                    <TextBlock Text="{DynamicResource Btn_TestConnection}" />
                                                 </StackPanel>
                                             </ui:Button>
                                         </StackPanel>
@@ -270,7 +270,7 @@
                 <ui:SymbolIcon Symbol="DataBarVertical24" FontSize="18"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                Margin="0,0,8,0" />
-                <TextBlock Text="Token Usage" FontSize="14" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Settings_TokenUsage}" FontSize="14" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                            VerticalAlignment="Center" />
             </StackPanel>
@@ -288,7 +288,7 @@
                         <ui:SymbolIcon Symbol="CallInbound24" FontSize="20"
                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                        Margin="0,0,0,4" />
-                        <TextBlock Text="Total Calls" FontSize="11"
+                        <TextBlock Text="{DynamicResource Lbl_TotalCalls}" FontSize="11"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                         <TextBlock Text="{Binding TotalCalls}" FontSize="22" FontWeight="Bold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
@@ -298,7 +298,7 @@
                         <ui:SymbolIcon Symbol="Tag24" FontSize="20"
                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                        Margin="0,0,0,4" />
-                        <TextBlock Text="Total Tokens" FontSize="11"
+                        <TextBlock Text="{DynamicResource Lbl_TotalTokens}" FontSize="11"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                         <TextBlock Text="{Binding TotalTokens}" FontSize="22" FontWeight="Bold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
@@ -308,7 +308,7 @@
                         <ui:SymbolIcon Symbol="Money24" FontSize="20"
                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                        Margin="0,0,0,4" />
-                        <TextBlock Text="Est. Cost" FontSize="11"
+                        <TextBlock Text="{DynamicResource Lbl_EstCost}" FontSize="11"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                         <TextBlock Text="{Binding EstimatedCost}" FontSize="22" FontWeight="Bold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
@@ -324,7 +324,7 @@
                 <ui:SymbolIcon Symbol="Shield24" FontSize="18"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                Margin="0,0,8,0" />
-                <TextBlock Text="License &amp; Info" FontSize="14" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Lbl_LicenseInfo}" FontSize="14" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                            VerticalAlignment="Center" />
             </StackPanel>
@@ -336,7 +336,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="License Key" FontSize="13"
+                        <TextBlock Grid.Column="0" Text="{DynamicResource Settings_LicenseKey}" FontSize="13"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                    VerticalAlignment="Center" />
                         <TextBlock Grid.Column="1" Text="{Binding MaskedLicenseKey}" FontSize="13"
@@ -352,7 +352,7 @@
                             <ColumnDefinition Width="140" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="App Version" FontSize="13"
+                        <TextBlock Grid.Column="0" Text="{DynamicResource Settings_Version}" FontSize="13"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                         <TextBlock Grid.Column="1" Text="{Binding AppVersion}" FontSize="13"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
@@ -362,7 +362,7 @@
                             <ColumnDefinition Width="140" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Last Update Check" FontSize="13"
+                        <TextBlock Grid.Column="0" Text="{DynamicResource Lbl_LastUpdateCheck}" FontSize="13"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                         <TextBlock Grid.Column="1" Text="{Binding LastUpdateCheck}" FontSize="13"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
@@ -371,7 +371,7 @@
                                Command="{Binding CheckForUpdatesCommand}">
                         <StackPanel Orientation="Horizontal">
                             <ui:SymbolIcon Symbol="ArrowSync24" Margin="0,0,6,0" />
-                            <TextBlock Text="Check for Updates" />
+                            <TextBlock Text="{DynamicResource Btn_CheckUpdates}" />
                         </StackPanel>
                     </ui:Button>
                 </StackPanel>

@@ -3,7 +3,7 @@ using AcademicAI.App.ViewModels;
 
 namespace AcademicAI.App.Views;
 
-public partial class ParaphraserView : Page
+public partial class ParaphraserView : UserControl
 {
     public ParaphraserView()
     {

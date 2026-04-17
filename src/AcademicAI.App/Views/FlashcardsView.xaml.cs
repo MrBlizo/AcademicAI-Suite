@@ -9,7 +9,7 @@ using AcademicAI.App.ViewModels;
 
 namespace AcademicAI.App.Views;
 
-public partial class FlashcardsView : Page
+public partial class FlashcardsView : UserControl
 {
     private readonly FlashcardsViewModel _vm;
 

@@ -3,28 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              AllowDrop="True"
+             HorizontalAlignment="Stretch"
              DragOver="PdfDropZone_DragOver"
              Drop="PdfDropZone_Drop">
-    <Border x:Name="DropBorder" CornerRadius="12" Padding="28,20"
-            Background="#1E1E2E"
-            BorderThickness="2"
-            BorderBrush="#6366F1">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ui:SymbolIcon Symbol="DocumentAdd24" FontSize="28"
-                           Foreground="#A5B4FC"
-                           HorizontalAlignment="Center" Margin="0,0,0,10" />
-            <TextBlock Text="Drop PDF here or click to browse"
-                       FontSize="14" FontWeight="SemiBold"
-                       Foreground="White"
-                       HorizontalAlignment="Center" />
-            <TextBlock Text="Supports .pdf files"
-                       FontSize="11"
-                       Foreground="#9CA3AF"
-                       HorizontalAlignment="Center" Margin="0,4,0,0" />
-            <TextBlock x:Name="FileNameText" Text=""
-                       FontSize="12" FontWeight="SemiBold"
-                       Foreground="#A5B4FC"
-                       HorizontalAlignment="Center" Margin="0,8,0,0" />
-        </StackPanel>
+    <Border x:Name="DropBorder" CornerRadius="12" Padding="24,16"
+            Background="{DynamicResource ControlFillColorDefaultBrush}"
+            BorderThickness="2" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+            MinHeight="100" HorizontalAlignment="Stretch">
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:SymbolIcon Grid.Column="0" Symbol="DocumentAdd24" FontSize="36"
+                           Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
+                           VerticalAlignment="Center" Margin="0,0,16,0" />
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                <TextBlock Text="{DynamicResource Msg_DropPdf}"
+                           FontSize="14" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                <TextBlock Text="{DynamicResource Msg_SupportsPdf}"
+                           FontSize="11"
+                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                           Margin="0,2,0,0" />
+                <TextBlock x:Name="FileNameText" Text=""
+                           FontSize="12" FontWeight="SemiBold"
+                           Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
+                           Margin="0,6,0,0" />
+            </StackPanel>
+        </Grid>
     </Border>
 </UserControl>

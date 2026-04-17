@@ -1,8 +1,7 @@
-<Page x:Class="AcademicAI.App.Views.ResearchLibraryView"
+<UserControl x:Class="AcademicAI.App.Views.ResearchLibraryView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      Title="Research Library">
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Margin="28">
 
@@ -12,9 +11,9 @@
                                Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
                                Margin="0,0,12,0" VerticalAlignment="Center" />
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Research Library" FontSize="22" FontWeight="SemiBold"
+                    <TextBlock Text="{DynamicResource Title_ResearchLibrary}" FontSize="22" FontWeight="SemiBold"
                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                    <TextBlock Text="Search books and articles from Anna's Archive, Library Genesis, Z-Library &amp; Sci-Hub"
+                    <TextBlock Text="{DynamicResource Desc_ResearchLibrary}"
                                FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                 </StackPanel>
             </StackPanel>
@@ -35,7 +34,7 @@
                                    IsEnabled="{Binding IsSearching, Converter={StaticResource BoolNegate}}">
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon Symbol="Search24" Margin="0,0,6,0" />
-                                <TextBlock Text="Search" />
+                                <TextBlock Text="{DynamicResource Btn_Search}" />
                             </StackPanel>
                         </ui:Button>
                     </Grid>
@@ -57,7 +56,7 @@
                         <Border Width="3" CornerRadius="2"
                                 Background="{DynamicResource AccentTextFillColorPrimaryBrush}"
                                 Margin="0,0,10,0" />
-                        <TextBlock Text="Browse Sources Directly" FontSize="14" FontWeight="SemiBold"
+                        <TextBlock Text="{DynamicResource Lbl_BrowseSources}" FontSize="14" FontWeight="SemiBold"
                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                    VerticalAlignment="Center" />
                     </StackPanel>
@@ -71,7 +70,7 @@
                                                    Foreground="#818CF8"
                                                    HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
-                                <TextBlock Text="Sci-Hub (Articles)" VerticalAlignment="Center" />
+                                <TextBlock Text="{DynamicResource Src_SciHubArticles}" VerticalAlignment="Center" />
                             </StackPanel>
                         </ui:Button>
                         <ui:Button Appearance="Secondary" Margin="0,0,8,8"
@@ -83,7 +82,7 @@
                                                    Foreground="#34D399"
                                                    HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
-                                <TextBlock Text="Z-Library" VerticalAlignment="Center" />
+                                <TextBlock Text="{DynamicResource Src_ZLibrary}" VerticalAlignment="Center" />
                             </StackPanel>
                         </ui:Button>
                         <ui:Button Appearance="Secondary" Margin="0,0,8,8"
@@ -95,7 +94,7 @@
                                                    Foreground="#FBBF24"
                                                    HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
-                                <TextBlock Text="Anna's Archive" VerticalAlignment="Center" />
+                                <TextBlock Text="{DynamicResource Src_AnnasArchive}" VerticalAlignment="Center" />
                             </StackPanel>
                         </ui:Button>
                         <ui:Button Appearance="Secondary" Margin="0,0,8,8"
@@ -107,7 +106,7 @@
                                                    Foreground="#F472B6"
                                                    HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
-                                <TextBlock Text="Library Genesis" VerticalAlignment="Center" />
+                                <TextBlock Text="{DynamicResource Src_LibraryGenesis}" VerticalAlignment="Center" />
                             </StackPanel>
                         </ui:Button>
                     </WrapPanel>
@@ -196,15 +195,15 @@
                                                    Click="OpenUrl" Cursor="Hand">
                                             <StackPanel Orientation="Horizontal">
                                                 <ui:SymbolIcon Symbol="Open24" Margin="0,0,6,0" />
-                                                <TextBlock Text="View / Download" />
+                                                <TextBlock Text="{DynamicResource Btn_ViewDownload}" />
                                             </StackPanel>
                                         </ui:Button>
                                         <ui:Button Appearance="Secondary" Margin="0,0,8,4"
-                                                   Command="{Binding DataContext.CopyCitationCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                   Command="{Binding DataContext.CopyCitationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                    CommandParameter="{Binding}">
                                             <StackPanel Orientation="Horizontal">
                                                 <ui:SymbolIcon Symbol="Copy24" Margin="0,0,6,0" />
-                                                <TextBlock Text="Copy Citation" />
+                                                <TextBlock Text="{DynamicResource Btn_CopyCitation}" />
                                             </StackPanel>
                                         </ui:Button>
                                         <ui:Button Appearance="Secondary" Margin="0,0,8,4"
@@ -216,7 +215,7 @@
                                                                    Foreground="#818CF8"
                                                                    HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                 </Border>
-                                                <TextBlock Text="Sci-Hub" />
+                                                <TextBlock Text="{DynamicResource Src_SciHub}" />
                                             </StackPanel>
                                         </ui:Button>
                                         <ui:Button Appearance="Secondary" Margin="0,0,8,4"
@@ -228,7 +227,7 @@
                                                                    Foreground="#34D399"
                                                                    HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                 </Border>
-                                                <TextBlock Text="Z-Lib" />
+                                                <TextBlock Text="{DynamicResource Src_ZLib}" />
                                             </StackPanel>
                                         </ui:Button>
                                     </WrapPanel>
@@ -247,11 +246,11 @@
                     <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="0,12,0,0">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
-                                <Setter Property="Text" Value="Search for books and research papers" />
+                                <Setter Property="Text" Value="{DynamicResource Msg_SearchPrompt}" />
                                 <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding HasSearched}" Value="True">
-                                        <Setter Property="Text" Value="No results found" />
+                                        <Setter Property="Text" Value="{DynamicResource Msg_NoResults}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -262,10 +261,10 @@
                                Margin="0,4,0,0">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
-                                <Setter Property="Text" Value="Results are fetched live from Anna's Archive &amp; Library Genesis" />
+                                <Setter Property="Text" Value="{DynamicResource Msg_ResultsSource}" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding HasSearched}" Value="True">
-                                        <Setter Property="Text" Value="Try a different query or browse the sources directly" />
+                                        <Setter Property="Text" Value="{DynamicResource Msg_TryDifferentQuery}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -276,4 +275,4 @@
 
         </StackPanel>
     </ScrollViewer>
-</Page>
+</UserControl>

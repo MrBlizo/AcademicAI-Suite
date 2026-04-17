@@ -9,13 +9,15 @@ namespace AcademicAI.Agents;
 public class FireworksAgent : IAIAgent
 {
     private readonly HttpClient _http;
+    private readonly ITokenTrackerService? _tokenTracker;
     private string _apiKey = "";
     private string _model = "accounts/fireworks/models/llama-v3p3-70b-instruct";
 
     public string Name => "Fireworks";
 
-    public FireworksAgent()
+    public FireworksAgent(ITokenTrackerService? tokenTracker = null)
     {
+        _tokenTracker = tokenTracker;
         _http = new HttpClient { Timeout = TimeSpan.FromMinutes(5) };
     }
 
@@ -46,7 +48,25 @@ public class FireworksAgent : IAIAgent
 
         var responseJson = await response.Content.ReadAsStringAsync();
         using var doc = JsonDocument.Parse(responseJson);
-        return doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString() ?? "";
+
+        var content = doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString() ?? "";
+
+        if (_tokenTracker != null)
+        {
+            try
+            {
+                if (doc.RootElement.TryGetProperty("usage", out var usage))
+                {
+                    var promptTokens = usage.TryGetProperty("prompt_tokens", out var pt) ? pt.GetInt32() : 0;
+                    var completionTokens = usage.TryGetProperty("completion_tokens", out var ct) ? ct.GetInt32() : 0;
+                    var estimatedCost = ProviderModels.EstimateCost("Fireworks", _model, promptTokens, completionTokens);
+                    _tokenTracker.RecordUsage("Fireworks", _model, promptTokens, completionTokens, estimatedCost);
+                }
+            }
+            catch { }
+        }
+
+        return content;
     }
 
     public async Task<(bool Success, string Error)> TestConnectionWithDetailsAsync()

@@ -5,7 +5,7 @@ using AcademicAI.App.ViewModels;
 
 namespace AcademicAI.App.Views;
 
-public partial class SummarizerView : Page
+public partial class SummarizerView : UserControl
 {
     public SummarizerView()
     {

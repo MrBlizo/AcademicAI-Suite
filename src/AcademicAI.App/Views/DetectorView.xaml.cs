@@ -8,7 +8,7 @@ using AcademicAI.App.ViewModels;
 
 namespace AcademicAI.App.Views;
 
-public partial class DetectorView : Page
+public partial class DetectorView : UserControl
 {
     public DetectorView()
     {

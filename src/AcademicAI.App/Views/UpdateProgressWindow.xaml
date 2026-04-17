@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="VersionText" Grid.Row="0" Text="Downloading update..."
+        <TextBlock x:Name="VersionText" Grid.Row="0" Text="{DynamicResource Msg_DownloadingUpdate}"
                    FontSize="13" Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
 
         <ProgressBar x:Name="ProgressBar" Grid.Row="2" Value="0" IsIndeterminate="False" />

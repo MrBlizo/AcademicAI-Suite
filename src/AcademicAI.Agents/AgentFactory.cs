@@ -6,13 +6,13 @@ public class AgentFactory : IAgentFactory
 {
     private readonly Dictionary<string, Func<IAIAgent>> _providers = new();
 
-    public AgentFactory()
+    public AgentFactory(ITokenTrackerService tokenTracker)
     {
         _providers["OpenRouter"] = () => new OpenAiCompatibleAgent(
-            "OpenRouter", "https://openrouter.ai/api/v1", "openai/gpt-4o-mini",
+            "OpenRouter", "https://openrouter.ai/api/v1", "openai/gpt-4o-mini", tokenTracker,
             req => { req.Headers.Add("HTTP-Referer", "https://academicai.app"); req.Headers.Add("X-Title", "AcademicAI Suite"); });
 
-        _providers["Fireworks"] = () => new FireworksAgent();
+        _providers["Fireworks"] = () => new FireworksAgent(tokenTracker);
     }
 
     public IAIAgent GetAgent(string providerName)

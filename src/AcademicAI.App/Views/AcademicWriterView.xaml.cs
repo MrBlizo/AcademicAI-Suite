@@ -3,7 +3,7 @@ using AcademicAI.App.ViewModels;
 
 namespace AcademicAI.App.Views;
 
-public partial class AcademicWriterView : Page
+public partial class AcademicWriterView : UserControl
 {
     public AcademicWriterView()
     {

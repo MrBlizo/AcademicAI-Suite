@@ -3,7 +3,7 @@ using AcademicAI.App.ViewModels;
 
 namespace AcademicAI.App.Views;
 
-public partial class TranslatorView : Page
+public partial class TranslatorView : UserControl
 {
     public TranslatorView()
     {

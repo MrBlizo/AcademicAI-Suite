@@ -31,9 +31,41 @@ public partial class App : Application
             ? Wpf.Ui.Appearance.ApplicationTheme.Light
             : Wpf.Ui.Appearance.ApplicationTheme.Dark;
         Wpf.Ui.Appearance.ApplicationThemeManager.Apply(appTheme);
-        // Apply 2026 indigo accent colour
         Wpf.Ui.Appearance.ApplicationAccentColorManager.Apply(
             System.Windows.Media.Color.FromRgb(0x63, 0x66, 0xF1), appTheme, false);
+    }
+
+    public static void ApplyLanguage(string languageCode)
+    {
+        var langDir = Path.Combine(AppContext.BaseDirectory, "Lang");
+        var filePath = Path.Combine(langDir, $"{languageCode}.json");
+        if (!File.Exists(filePath)) filePath = Path.Combine(langDir, "en.json");
+        if (!File.Exists(filePath)) return;
+
+        var json = File.ReadAllText(filePath);
+        var strings = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+        if (strings == null) return;
+
+        var existing = Current.Resources.MergedDictionaries.FirstOrDefault(d => d.Contains("__LangTag"));
+        if (existing != null) Current.Resources.MergedDictionaries.Remove(existing);
+
+        var rd = new ResourceDictionary();
+        rd["__LangTag"] = true;
+        foreach (var (key, value) in strings)
+            rd[key] = value;
+        Current.Resources.MergedDictionaries.Add(rd);
+
+        var locManager = (LocalizationManager)LocalizationManager.Instance!;
+        locManager.SetLanguage(languageCode);
+
+        if (Current.MainWindow != null)
+        {
+            Current.MainWindow.FlowDirection = languageCode == "ar"
+                ? FlowDirection.RightToLeft
+                : FlowDirection.LeftToRight;
+            if (Current.MainWindow is MainWindow mw)
+                mw.ReloadLocalization();
+        }
     }
 
     private async void Application_Startup(object sender, StartupEventArgs e)
@@ -122,6 +154,7 @@ public partial class App : Application
             var locManager = (LocalizationManager)LocalizationManager.Instance!;
             locManager.Reload();
             locManager.SetLanguage(settingsService.Settings.Language);
+            ApplyLanguage(settingsService.Settings.Language);
 
             _splash.UpdateStatus("Applying theme...", 55);
             ApplyTheme(settingsService.Settings.Theme);

@@ -3,7 +3,7 @@ using AcademicAI.App.ViewModels;
 
 namespace AcademicAI.App.Views;
 
-public partial class NoteOrganizerView : Page
+public partial class NoteOrganizerView : UserControl
 {
     public NoteOrganizerView()
     {

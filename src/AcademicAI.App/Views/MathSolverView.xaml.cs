@@ -3,7 +3,7 @@ using AcademicAI.App.ViewModels;
 
 namespace AcademicAI.App.Views;
 
-public partial class MathSolverView : Page
+public partial class MathSolverView : UserControl
 {
     public MathSolverView()
     {

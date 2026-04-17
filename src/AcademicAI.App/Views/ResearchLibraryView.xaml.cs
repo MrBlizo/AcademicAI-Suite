@@ -6,7 +6,7 @@ using AcademicAI.Core.Models;
 
 namespace AcademicAI.App.Views;
 
-public partial class ResearchLibraryView : Page
+public partial class ResearchLibraryView : UserControl
 {
     public ResearchLibraryView()
     {

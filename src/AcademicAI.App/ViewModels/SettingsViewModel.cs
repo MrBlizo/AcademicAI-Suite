@@ -87,6 +87,19 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty] private int _totalTokens;
     [ObservableProperty] private string _estimatedCost = "$0.00";
 
+    public void RefreshUsage()
+    {
+        try
+        {
+            var tokenTracker = App.Services.GetRequiredService<ITokenTrackerService>();
+            var usage = tokenTracker.GetTotalUsage();
+            TotalCalls = usage.TotalCalls;
+            TotalTokens = usage.TotalPromptTokens + usage.TotalCompletionTokens;
+            EstimatedCost = $"${usage.EstimatedCost:F4}";
+        }
+        catch { }
+    }
+
     public ObservableCollection<FeatureDefaultItem> FeatureDefaultItems { get; } = [];
     public ObservableCollection<ProviderConfigItem> ProviderConfigItems { get; } = [];
 
@@ -148,8 +161,11 @@ public partial class SettingsViewModel : ObservableObject
         try
         {
             var settingsService = App.Services.GetRequiredService<IAppSettingsService>();
+            var oldLang = settingsService.Settings.Language;
+            if (SelectedLanguage == oldLang) return;
             settingsService.Settings.Language = SelectedLanguage;
             settingsService.Save();
+            App.ApplyLanguage(SelectedLanguage);
         }
         catch { }
     }

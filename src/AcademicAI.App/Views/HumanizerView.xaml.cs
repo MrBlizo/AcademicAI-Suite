@@ -3,7 +3,7 @@ using AcademicAI.App.ViewModels;
 
 namespace AcademicAI.App.Views;
 
-public partial class HumanizerView : Page
+public partial class HumanizerView : UserControl
 {
     public HumanizerView()
     {
