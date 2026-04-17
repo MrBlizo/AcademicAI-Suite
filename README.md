@@ -63,7 +63,7 @@
 
 | Planner | Text Tools | Research |
 |:---:|:---:|:---:|
-| ![Planner](docs/screenshots/planner.png) | ![Text Tools](docs/screenshots/texttools.png) | ![Research](docs/screenshots/research.png) |
+| ![Planner](docs/screenshots/planner.png) | ![Text Tools](docs/screenshots/texttools.png) | ![Research](docs/screenshots/Research.png) |
 
 ---
 
