@@ -215,5 +215,7 @@
   "SummaryLength_Brief": "Kurz (2-3 Sätze)",
   "SummaryLength_Detailed": "Detailliert (1-2 Absätze)",
   "SummaryLength_BulletPoints": "Aufzählung",
-  "SummaryLength_Executive": "Executive Summary"
+  "SummaryLength_Executive": "Executive Summary",
+  "Lbl_Configured": "Konfiguriert",
+  "Lbl_NotConfigured": "Nicht konfiguriert"
 }

@@ -21,6 +21,8 @@ public partial class SettingsView : Page
     {
         UpdateThemeButtons();
         SelectCurrentLanguage();
+        if (DataContext is SettingsViewModel vm)
+            vm.RefreshUsage();
     }
 
     private void DarkThemeButton_Click(object sender, RoutedEventArgs e)
@@ -98,8 +100,12 @@ public class ConfiguredBrushConverter : IValueConverter
 
 public class ConfiguredTextConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
-        value is true ? "Configured" : "Not Configured";
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (Application.Current.FindResource("Lbl_Configured") is string configured)
+            return value is true ? configured : Application.Current.FindResource("Lbl_NotConfigured") as string ?? "Not Configured";
+        return value is true ? "Configured" : "Not Configured";
+    }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
         throw new NotImplementedException();

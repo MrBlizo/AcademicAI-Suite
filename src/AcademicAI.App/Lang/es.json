@@ -215,5 +215,7 @@
   "SummaryLength_Brief": "Breve (2-3 oraciones)",
   "SummaryLength_Detailed": "Detallado (1-2 párrafos)",
   "SummaryLength_BulletPoints": "Viñetas",
-  "SummaryLength_Executive": "Resumen ejecutivo"
+  "SummaryLength_Executive": "Resumen ejecutivo",
+  "Lbl_Configured": "Configurado",
+  "Lbl_NotConfigured": "No configurado"
 }

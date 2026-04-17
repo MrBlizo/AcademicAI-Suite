@@ -215,5 +215,7 @@
   "SummaryLength_Brief": "Bref (2-3 phrases)",
   "SummaryLength_Detailed": "Détaillé (1-2 paragraphes)",
   "SummaryLength_BulletPoints": "Puces",
-  "SummaryLength_Executive": "Résumé exécutif"
+  "SummaryLength_Executive": "Résumé exécutif",
+  "Lbl_Configured": "Configuré",
+  "Lbl_NotConfigured": "Non configuré"
 }

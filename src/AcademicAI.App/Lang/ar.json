@@ -215,5 +215,7 @@
   "SummaryLength_Brief": "موجز (2-3 جمل)",
   "SummaryLength_Detailed": "مفصل (1-2 فقرات)",
   "SummaryLength_BulletPoints": "نقاط",
-  "SummaryLength_Executive": "ملخص تنفيذي"
+  "SummaryLength_Executive": "ملخص تنفيذي",
+  "Lbl_Configured": "مُكوَّن",
+  "Lbl_NotConfigured": "غير مُكوَّن"
 }

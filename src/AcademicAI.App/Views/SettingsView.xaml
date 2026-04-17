@@ -102,7 +102,7 @@
                     <ui:CardControl>
                         <ui:CardControl.Header>
                             <StackPanel>
-                                <TextBlock Text="Clipboard Monitor" FontSize="13" FontWeight="SemiBold"
+                                 <TextBlock Text="{DynamicResource Settings_ClipboardMonitor}" FontSize="13" FontWeight="SemiBold"
                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                 <TextBlock Text="{DynamicResource Desc_ClipboardMonitor}"
                                            FontSize="11"
